@@ -20,4 +20,5 @@ void pwm_init(uint32_t pin, int channel_number);
 void pwm_out(int freq, int duty, int duration_ms, int channel_number);
 volatile unsigned long* IOREG32(unsigned long offset, int channel);
 void pwm_pulse5ms(int pulse_duration_ms, int channel_number);
+void pwm_off (int channel_number);
 #endif  /* PWM_H */

@@ -1,13 +1,26 @@
 Archive member included to satisfy reference by file (symbol)
 
 lib/libbsp.a(system.o)        startup.o (SystemInit)
-lib/libbsp.a(board.o)         startup.o (led_blink)
-lib/libbsp.a(serial.o)        lib/libbsp.a(board.o) (serial_init)
+lib/libbsp.a(board.o)         main.o (led_blink)
+lib/libbsp.a(serial.o)        main.o (serial_init)
 lib/libbsp.a(gpio.o)          lib/libbsp.a(board.o) (gpio_in)
 lib/libbsp.a(audio.o)         lib/libbsp.a(board.o) (audio_init)
 lib/libbsp.a(buggy.o)         main.o (buggy_init)
 lib/libbsp.a(pwm.o)           lib/libbsp.a(audio.o) (pwm_init)
 lib/libbsp.a(adc.o)           lib/libbsp.a(audio.o) (adc_init)
+rtx/librtx.a(rtx_kernel.o)    main.o (osKernelInitialize)
+rtx/librtx.a(rtx_lib.o)       rtx/librtx.a(rtx_kernel.o) (osRtxConfig)
+rtx/librtx.a(rtx_memory.o)    rtx/librtx.a(rtx_kernel.o) (osRtxMemoryInit)
+rtx/librtx.a(rtx_mempool.o)   rtx/librtx.a(rtx_kernel.o) (osRtxMemoryPoolInit)
+rtx/librtx.a(rtx_system.o)    rtx/librtx.a(rtx_mempool.o) (osRtxPostProcess)
+rtx/librtx.a(rtx_thread.o)    rtx/librtx.a(rtx_mempool.o) (osRtxThreadListPut)
+rtx/librtx.a(rtx_timer.o)     rtx/librtx.a(rtx_lib.o) (osRtxTimerSetup)
+rtx/librtx.a(irq_armv7m.o)    rtx/librtx.a(rtx_lib.o) (irqRtxLib)
+rtx/librtx.a(os_systick.o)    rtx/librtx.a(rtx_kernel.o) (OS_Tick_Setup)
+rtx/librtx.a(RTX_Config.o)    rtx/librtx.a(rtx_thread.o) (osRtxIdleThread)
+rtx/librtx.a(rtx_evr.o)       rtx/librtx.a(rtx_memory.o) (EvrRtxMemoryInit)
+rtx/librtx.a(rtx_msgqueue.o)  rtx/librtx.a(rtx_timer.o) (osRtxMessageQueueTimerSetup)
+rtx/librtx.a(rtx_mutex.o)     rtx/librtx.a(rtx_thread.o) (osRtxMutexOwnerRelease)
 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a(libm_a-w_pow.o)
                               lib/libbsp.a(audio.o) (pow)
 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a(libm_a-s_finite.o)
@@ -24,12 +37,16 @@ lib/libbsp.a(adc.o)           lib/libbsp.a(audio.o) (adc_init)
                               /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a(libm_a-e_pow.o) (__ieee754_sqrt)
 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-errno.o)
                               /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a(libm_a-w_pow.o) (__errno)
+/opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memset.o)
+                              rtx/librtx.a(rtx_mempool.o) (memset)
 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-ctype_.o)
                               lib/libbsp.a(audio.o) (_ctype_)
 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-impure.o)
                               /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-errno.o) (_impure_ptr)
 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-findfp.o)
                               /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-impure.o) (__sf)
+/opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memcpy.o)
+                              rtx/librtx.a(rtx_kernel.o) (memcpy)
 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-stdio.o)
                               /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-findfp.o) (__sread)
 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-fwalk.o)
@@ -38,8 +55,6 @@ lib/libbsp.a(adc.o)           lib/libbsp.a(audio.o) (adc_init)
                               /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-stdio.o) (_write_r)
 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-mallocr.o)
                               /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-findfp.o) (_malloc_r)
-/opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memset.o)
-                              /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-findfp.o) (memset)
 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-lock.o)
                               /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-findfp.o) (__retarget_lock_init_recursive)
 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-fclose.o)
@@ -87,6 +102,30 @@ Discarded input sections
  .group         0x0000000000000000        0xc main.o
  .group         0x0000000000000000        0xc main.o
  .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
+ .group         0x0000000000000000        0xc main.o
  .text          0x0000000000000000        0x0 main.o
  .data          0x0000000000000000        0x0 main.o
  .bss           0x0000000000000000        0x0 main.o
@@ -100,12 +139,16 @@ Discarded input sections
  .text          0x0000000000000000        0x0 startup.o
  .data          0x0000000000000000        0x0 startup.o
  .bss           0x0000000000000000        0x0 startup.o
+ .text.SysTick_Handler
+                0x0000000000000000        0xc startup.o
  .text.GPIOTE_IRQHandler
+                0x0000000000000000        0xc startup.o
+ .text.SVC_Handler
+                0x0000000000000000        0xc startup.o
+ .text.PendSV_Handler
                 0x0000000000000000        0xc startup.o
  .debug_macro   0x0000000000000000      0xaa2 startup.o
  .debug_macro   0x0000000000000000       0x22 startup.o
- .debug_macro   0x0000000000000000       0x8e startup.o
- .debug_macro   0x0000000000000000       0x51 startup.o
  .debug_macro   0x0000000000000000      0x103 startup.o
  .debug_macro   0x0000000000000000       0x6a startup.o
  .debug_macro   0x0000000000000000      0x1df startup.o
@@ -158,6 +201,11 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x103 lib/libbsp.a(board.o)
  .debug_macro   0x0000000000000000       0x6a lib/libbsp.a(board.o)
  .debug_macro   0x0000000000000000      0x1df lib/libbsp.a(board.o)
+ .debug_macro   0x0000000000000000       0x3a lib/libbsp.a(board.o)
+ .debug_macro   0x0000000000000000       0x40 lib/libbsp.a(board.o)
+ .debug_macro   0x0000000000000000       0x10 lib/libbsp.a(board.o)
+ .debug_macro   0x0000000000000000       0x88 lib/libbsp.a(board.o)
+ .debug_macro   0x0000000000000000       0x58 lib/libbsp.a(board.o)
  .group         0x0000000000000000        0xc lib/libbsp.a(serial.o)
  .group         0x0000000000000000        0xc lib/libbsp.a(serial.o)
  .group         0x0000000000000000        0xc lib/libbsp.a(serial.o)
@@ -169,26 +217,14 @@ Discarded input sections
  .text          0x0000000000000000        0x0 lib/libbsp.a(serial.o)
  .data          0x0000000000000000        0x0 lib/libbsp.a(serial.o)
  .bss           0x0000000000000000        0x0 lib/libbsp.a(serial.o)
- .text.serial_init
-                0x0000000000000000       0x50 lib/libbsp.a(serial.o)
  .text.getc_nowait
                 0x0000000000000000       0x10 lib/libbsp.a(serial.o)
  .text.getc     0x0000000000000000       0x1c lib/libbsp.a(serial.o)
  .text.putc_nowait
                 0x0000000000000000        0xc lib/libbsp.a(serial.o)
  .text.putc     0x0000000000000000       0x1c lib/libbsp.a(serial.o)
- .text.puts     0x0000000000000000       0x28 lib/libbsp.a(serial.o)
  .text.print_buf
                 0x0000000000000000       0x34 lib/libbsp.a(serial.o)
- .debug_info    0x0000000000000000      0x29d lib/libbsp.a(serial.o)
- .debug_abbrev  0x0000000000000000      0x183 lib/libbsp.a(serial.o)
- .debug_loclists
-                0x0000000000000000      0x147 lib/libbsp.a(serial.o)
- .debug_aranges
-                0x0000000000000000       0x50 lib/libbsp.a(serial.o)
- .debug_rnglists
-                0x0000000000000000       0x55 lib/libbsp.a(serial.o)
- .debug_macro   0x0000000000000000       0xe8 lib/libbsp.a(serial.o)
  .debug_macro   0x0000000000000000      0xaa2 lib/libbsp.a(serial.o)
  .debug_macro   0x0000000000000000       0x22 lib/libbsp.a(serial.o)
  .debug_macro   0x0000000000000000       0x8e lib/libbsp.a(serial.o)
@@ -197,12 +233,6 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x6a lib/libbsp.a(serial.o)
  .debug_macro   0x0000000000000000      0x1df lib/libbsp.a(serial.o)
  .debug_macro   0x0000000000000000       0x3a lib/libbsp.a(serial.o)
- .debug_line    0x0000000000000000      0x42a lib/libbsp.a(serial.o)
- .debug_str     0x0000000000000000     0x402e lib/libbsp.a(serial.o)
- .comment       0x0000000000000000       0x46 lib/libbsp.a(serial.o)
- .debug_frame   0x0000000000000000       0x9c lib/libbsp.a(serial.o)
- .ARM.attributes
-                0x0000000000000000       0x34 lib/libbsp.a(serial.o)
  .group         0x0000000000000000        0xc lib/libbsp.a(gpio.o)
  .group         0x0000000000000000        0xc lib/libbsp.a(gpio.o)
  .group         0x0000000000000000        0xc lib/libbsp.a(gpio.o)
@@ -218,9 +248,6 @@ Discarded input sections
  .text          0x0000000000000000        0x0 lib/libbsp.a(gpio.o)
  .data          0x0000000000000000        0x0 lib/libbsp.a(gpio.o)
  .bss           0x0000000000000000        0x0 lib/libbsp.a(gpio.o)
- .text.gpio_in  0x0000000000000000       0x18 lib/libbsp.a(gpio.o)
- .text.gpio_out
-                0x0000000000000000       0x38 lib/libbsp.a(gpio.o)
  .text.gpio_write
                 0x0000000000000000       0x38 lib/libbsp.a(gpio.o)
  .text.gpio_read
@@ -341,10 +368,6 @@ Discarded input sections
  .text          0x0000000000000000        0x0 lib/libbsp.a(buggy.o)
  .data          0x0000000000000000        0x0 lib/libbsp.a(buggy.o)
  .bss           0x0000000000000000        0x0 lib/libbsp.a(buggy.o)
- .text.buggy_move_forward
-                0x0000000000000000       0x50 lib/libbsp.a(buggy.o)
- .text.buggy_move_reverse
-                0x0000000000000000       0x50 lib/libbsp.a(buggy.o)
  .debug_macro   0x0000000000000000      0xaa2 lib/libbsp.a(buggy.o)
  .debug_macro   0x0000000000000000       0x22 lib/libbsp.a(buggy.o)
  .debug_macro   0x0000000000000000       0x8e lib/libbsp.a(buggy.o)
@@ -381,7 +404,6 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 lib/libbsp.a(pwm.o)
  .text.IOREG32  0x0000000000000000       0x28 lib/libbsp.a(pwm.o)
  .text.pwm_out  0x0000000000000000       0x5c lib/libbsp.a(pwm.o)
- .text.pwm_off  0x0000000000000000       0x20 lib/libbsp.a(pwm.o)
  .debug_macro   0x0000000000000000      0xaa2 lib/libbsp.a(pwm.o)
  .debug_macro   0x0000000000000000       0x22 lib/libbsp.a(pwm.o)
  .debug_macro   0x0000000000000000       0x8e lib/libbsp.a(pwm.o)
@@ -401,6 +423,8 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x58 lib/libbsp.a(pwm.o)
  .debug_macro   0x0000000000000000      0x1de lib/libbsp.a(pwm.o)
  .debug_macro   0x0000000000000000      0x369 lib/libbsp.a(pwm.o)
+ .debug_macro   0x0000000000000000       0x10 lib/libbsp.a(pwm.o)
+ .debug_macro   0x0000000000000000       0x35 lib/libbsp.a(pwm.o)
  .debug_macro   0x0000000000000000       0x40 lib/libbsp.a(pwm.o)
  .group         0x0000000000000000        0xc lib/libbsp.a(adc.o)
  .group         0x0000000000000000        0xc lib/libbsp.a(adc.o)
@@ -469,6 +493,1212 @@ Discarded input sections
  .debug_frame   0x0000000000000000       0x54 lib/libbsp.a(adc.o)
  .ARM.attributes
                 0x0000000000000000       0x34 lib/libbsp.a(adc.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_kernel.o)
+ .text          0x0000000000000000        0x0 rtx/librtx.a(rtx_kernel.o)
+ .data          0x0000000000000000        0x0 rtx/librtx.a(rtx_kernel.o)
+ .bss           0x0000000000000000        0x0 rtx/librtx.a(rtx_kernel.o)
+ .text.svcRtxKernelGetInfo
+                0x0000000000000000       0x50 rtx/librtx.a(rtx_kernel.o)
+ .text.svcRtxKernelGetState
+                0x0000000000000000       0x14 rtx/librtx.a(rtx_kernel.o)
+ .text.svcRtxKernelGetTickCount
+                0x0000000000000000       0x14 rtx/librtx.a(rtx_kernel.o)
+ .text.svcRtxKernelGetTickFreq
+                0x0000000000000000       0x14 rtx/librtx.a(rtx_kernel.o)
+ .text.svcRtxKernelGetSysTimerCount
+                0x0000000000000000       0x34 rtx/librtx.a(rtx_kernel.o)
+ .text.svcRtxKernelGetSysTimerFreq
+                0x0000000000000000       0x10 rtx/librtx.a(rtx_kernel.o)
+ .text.svcRtxKernelLock
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_kernel.o)
+ .text.svcRtxKernelUnlock
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_kernel.o)
+ .text.svcRtxKernelRestoreLock
+                0x0000000000000000       0x40 rtx/librtx.a(rtx_kernel.o)
+ .text.svcRtxKernelSuspend
+                0x0000000000000000       0x64 rtx/librtx.a(rtx_kernel.o)
+ .text.svcRtxKernelResume
+                0x0000000000000000       0xd4 rtx/librtx.a(rtx_kernel.o)
+ .text.osKernelGetInfo
+                0x0000000000000000       0x80 rtx/librtx.a(rtx_kernel.o)
+ .text.osKernelGetState
+                0x0000000000000000       0x40 rtx/librtx.a(rtx_kernel.o)
+ .text.osKernelLock
+                0x0000000000000000       0x34 rtx/librtx.a(rtx_kernel.o)
+ .text.osKernelUnlock
+                0x0000000000000000       0x34 rtx/librtx.a(rtx_kernel.o)
+ .text.osKernelRestoreLock
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_kernel.o)
+ .text.osKernelSuspend
+                0x0000000000000000       0x34 rtx/librtx.a(rtx_kernel.o)
+ .text.osKernelResume
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_kernel.o)
+ .text.osKernelGetTickCount
+                0x0000000000000000       0x34 rtx/librtx.a(rtx_kernel.o)
+ .text.osKernelGetTickFreq
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_kernel.o)
+ .text.osKernelGetSysTimerCount
+                0x0000000000000000       0x58 rtx/librtx.a(rtx_kernel.o)
+ .text.osKernelGetSysTimerFreq
+                0x0000000000000000       0x34 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000      0xaa2 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x75 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x2a rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x94 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x3c rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000      0x189 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x16 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x43 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x57 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x58 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000      0x1de rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000      0x369 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x35 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000      0x103 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000      0x1df rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000000000       0x74 rtx/librtx.a(rtx_kernel.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_lib.o)
+ .text          0x0000000000000000        0x0 rtx/librtx.a(rtx_lib.o)
+ .data          0x0000000000000000        0x0 rtx/librtx.a(rtx_lib.o)
+ .bss           0x0000000000000000        0x0 rtx/librtx.a(rtx_lib.o)
+ .text.software_init_hook
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_lib.o)
+ .rodata.irqRtxLibRef
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000      0xaa2 rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000       0x8e rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000       0x51 rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000      0x103 rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000      0x1df rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000      0x189 rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000       0x74 rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000      0x1a3 rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000      0x198 rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000       0x2e rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000       0x1c rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000     0x1011 rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000      0x11f rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_lib.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_memory.o)
+ .text          0x0000000000000000        0x0 rtx/librtx.a(rtx_memory.o)
+ .data          0x0000000000000000        0x0 rtx/librtx.a(rtx_memory.o)
+ .bss           0x0000000000000000        0x0 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000      0xaa2 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x75 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x2a rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x94 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x3c rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000      0x189 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x16 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x43 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x57 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x58 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000      0x1de rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000      0x369 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x35 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000      0x1a3 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x2e rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000      0x103 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000      0x1df rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x1c rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000      0x107 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000     0x1011 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000      0x11f rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0xbb rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x74 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000      0x198 rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000000000       0x46 rtx/librtx.a(rtx_memory.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mempool.o)
+ .text          0x0000000000000000        0x0 rtx/librtx.a(rtx_mempool.o)
+ .data          0x0000000000000000        0x0 rtx/librtx.a(rtx_mempool.o)
+ .bss           0x0000000000000000        0x0 rtx/librtx.a(rtx_mempool.o)
+ .text.svcRtxMemoryPoolGetName
+                0x0000000000000000       0x24 rtx/librtx.a(rtx_mempool.o)
+ .text.svcRtxMemoryPoolGetCapacity
+                0x0000000000000000       0x24 rtx/librtx.a(rtx_mempool.o)
+ .text.svcRtxMemoryPoolGetBlockSize
+                0x0000000000000000       0x24 rtx/librtx.a(rtx_mempool.o)
+ .text.svcRtxMemoryPoolGetCount
+                0x0000000000000000       0x24 rtx/librtx.a(rtx_mempool.o)
+ .text.svcRtxMemoryPoolGetSpace
+                0x0000000000000000       0x2c rtx/librtx.a(rtx_mempool.o)
+ .text.osRtxMemoryPoolPostProcess
+                0x0000000000000000       0x64 rtx/librtx.a(rtx_mempool.o)
+ .text.svcRtxMemoryPoolAlloc
+                0x0000000000000000       0x9c rtx/librtx.a(rtx_mempool.o)
+ .text.svcRtxMemoryPoolFree
+                0x0000000000000000       0xe0 rtx/librtx.a(rtx_mempool.o)
+ .text.svcRtxMemoryPoolNew
+                0x0000000000000000      0x1dc rtx/librtx.a(rtx_mempool.o)
+ .text.svcRtxMemoryPoolDelete
+                0x0000000000000000       0x88 rtx/librtx.a(rtx_mempool.o)
+ .text.osMemoryPoolNew
+                0x0000000000000000       0x40 rtx/librtx.a(rtx_mempool.o)
+ .text.osMemoryPoolGetName
+                0x0000000000000000       0x30 rtx/librtx.a(rtx_mempool.o)
+ .text.osMemoryPoolAlloc
+                0x0000000000000000       0xa4 rtx/librtx.a(rtx_mempool.o)
+ .text.osMemoryPoolFree
+                0x0000000000000000       0x78 rtx/librtx.a(rtx_mempool.o)
+ .text.osMemoryPoolGetCapacity
+                0x0000000000000000       0x44 rtx/librtx.a(rtx_mempool.o)
+ .text.osMemoryPoolGetBlockSize
+                0x0000000000000000       0x44 rtx/librtx.a(rtx_mempool.o)
+ .text.osMemoryPoolGetCount
+                0x0000000000000000       0x44 rtx/librtx.a(rtx_mempool.o)
+ .text.osMemoryPoolGetSpace
+                0x0000000000000000       0x4c rtx/librtx.a(rtx_mempool.o)
+ .text.osMemoryPoolDelete
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000      0xaa2 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x75 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x2a rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x94 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x3c rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000      0x189 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x16 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x43 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x57 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x58 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000      0x1de rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000      0x369 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x35 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000      0x1a3 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x2e rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000      0x103 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000      0x1df rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x1c rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000      0x107 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000     0x1011 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000      0x11f rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0xbb rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x74 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000      0x198 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x0000000000000000       0x46 rtx/librtx.a(rtx_mempool.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_system.o)
+ .text          0x0000000000000000        0x0 rtx/librtx.a(rtx_system.o)
+ .data          0x0000000000000000        0x0 rtx/librtx.a(rtx_system.o)
+ .bss           0x0000000000000000        0x0 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000      0xaa2 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x75 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x2a rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x94 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x3c rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000      0x189 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x16 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x43 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x57 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x58 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000      0x1de rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000      0x369 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x35 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000      0x1a3 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x2e rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000      0x103 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000      0x1df rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x1c rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000      0x107 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000     0x1011 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000      0x11f rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0xbb rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x74 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000      0x198 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x0000000000000000       0x46 rtx/librtx.a(rtx_system.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_thread.o)
+ .text          0x0000000000000000        0x0 rtx/librtx.a(rtx_thread.o)
+ .data          0x0000000000000000        0x0 rtx/librtx.a(rtx_thread.o)
+ .bss           0x0000000000000000        0x0 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadGetId
+                0x0000000000000000       0x14 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadGetState
+                0x0000000000000000       0x2c rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadGetPriority
+                0x0000000000000000       0x30 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadGetCount
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadFlagsGet
+                0x0000000000000000       0x20 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadGetName
+                0x0000000000000000       0x24 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadGetStackSize
+                0x0000000000000000       0x24 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadGetStackSpace
+                0x0000000000000000       0x60 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadEnumerate
+                0x0000000000000000       0x94 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadFlagsClear
+                0x0000000000000000       0x50 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadYield
+                0x0000000000000000       0x88 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadFlagsWait
+                0x0000000000000000      0x108 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadSuspend
+                0x0000000000000000      0x12c rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadResume
+                0x0000000000000000       0x9c rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadFlagsSet
+                0x0000000000000000       0xf4 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadDetach
+                0x0000000000000000       0x6c rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadTerminate
+                0x0000000000000000      0x204 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadJoin
+                0x0000000000000000      0x148 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadGetName
+                0x0000000000000000       0x30 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadGetId
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadGetState
+                0x0000000000000000       0x34 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadGetStackSize
+                0x0000000000000000       0x30 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadGetStackSpace
+                0x0000000000000000       0x30 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadGetPriority
+                0x0000000000000000       0x34 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadYield
+                0x0000000000000000       0x34 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadSuspend
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadResume
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadDetach
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadJoin
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadTerminate
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadGetCount
+                0x0000000000000000       0x2c rtx/librtx.a(rtx_thread.o)
+ .text.osThreadEnumerate
+                0x0000000000000000       0x34 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadFlagsSet
+                0x0000000000000000       0x90 rtx/librtx.a(rtx_thread.o)
+ .text.osThreadFlagsClear
+                0x0000000000000000       0x3c rtx/librtx.a(rtx_thread.o)
+ .text.osThreadFlagsGet
+                0x0000000000000000       0x2c rtx/librtx.a(rtx_thread.o)
+ .text.osThreadFlagsWait
+                0x0000000000000000       0x44 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000      0xaa2 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x75 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x2a rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x94 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x3c rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000      0x189 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x16 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x43 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x57 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x58 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000      0x1de rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000      0x369 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x35 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000      0x1a3 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x2e rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000      0x103 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000      0x1df rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x1c rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000      0x107 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000     0x1011 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000      0x11f rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0xbb rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x74 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000      0x198 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x0000000000000000       0x46 rtx/librtx.a(rtx_thread.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_timer.o)
+ .text          0x0000000000000000        0x0 rtx/librtx.a(rtx_timer.o)
+ .data          0x0000000000000000        0x0 rtx/librtx.a(rtx_timer.o)
+ .bss           0x0000000000000000        0x0 rtx/librtx.a(rtx_timer.o)
+ .text.svcRtxTimerStop
+                0x0000000000000000       0x64 rtx/librtx.a(rtx_timer.o)
+ .text.svcRtxTimerIsRunning
+                0x0000000000000000       0x28 rtx/librtx.a(rtx_timer.o)
+ .text.svcRtxTimerDelete
+                0x0000000000000000       0x80 rtx/librtx.a(rtx_timer.o)
+ .text.svcRtxTimerGetName
+                0x0000000000000000       0x24 rtx/librtx.a(rtx_timer.o)
+ .text.osTimerGetName
+                0x0000000000000000       0x30 rtx/librtx.a(rtx_timer.o)
+ .text.osTimerStop
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_timer.o)
+ .text.osTimerIsRunning
+                0x0000000000000000       0x30 rtx/librtx.a(rtx_timer.o)
+ .text.osTimerDelete
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000      0xaa2 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x75 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x2a rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x94 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x3c rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000      0x189 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x16 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x43 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x57 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x58 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000      0x1de rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000      0x369 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x35 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000      0x1a3 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x2e rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000      0x103 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000      0x1df rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x1c rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000      0x107 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000     0x1011 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000      0x11f rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0xbb rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x74 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000      0x198 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x0000000000000000       0x46 rtx/librtx.a(rtx_timer.o)
+ .data          0x0000000000000000        0x0 rtx/librtx.a(irq_armv7m.o)
+ .bss           0x0000000000000000        0x0 rtx/librtx.a(irq_armv7m.o)
+ .rodata        0x0000000000000000        0x1 rtx/librtx.a(irq_armv7m.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .text          0x0000000000000000        0x0 rtx/librtx.a(os_systick.o)
+ .data          0x0000000000000000        0x0 rtx/librtx.a(os_systick.o)
+ .bss           0x0000000000000000        0x0 rtx/librtx.a(os_systick.o)
+ .text.OS_Tick_Disable
+                0x0000000000000000       0x2c rtx/librtx.a(os_systick.o)
+ .text.OS_Tick_GetClock
+                0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .text.OS_Tick_GetInterval
+                0x0000000000000000        0xc rtx/librtx.a(os_systick.o)
+ .text.OS_Tick_GetCount
+                0x0000000000000000       0x10 rtx/librtx.a(os_systick.o)
+ .text.OS_Tick_GetOverflow
+                0x0000000000000000       0x10 rtx/librtx.a(os_systick.o)
+ .debug_macro   0x0000000000000000      0xaa2 rtx/librtx.a(os_systick.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(os_systick.o)
+ .debug_macro   0x0000000000000000       0x8e rtx/librtx.a(os_systick.o)
+ .debug_macro   0x0000000000000000       0x51 rtx/librtx.a(os_systick.o)
+ .debug_macro   0x0000000000000000      0x103 rtx/librtx.a(os_systick.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(os_systick.o)
+ .debug_macro   0x0000000000000000      0x1df rtx/librtx.a(os_systick.o)
+ .debug_macro   0x0000000000000000       0x2e rtx/librtx.a(os_systick.o)
+ .debug_macro   0x0000000000000000       0x1c rtx/librtx.a(os_systick.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(os_systick.o)
+ .debug_macro   0x0000000000000000      0x107 rtx/librtx.a(os_systick.o)
+ .debug_macro   0x0000000000000000     0x1011 rtx/librtx.a(os_systick.o)
+ .debug_macro   0x0000000000000000      0x11f rtx/librtx.a(os_systick.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(RTX_Config.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(RTX_Config.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(RTX_Config.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(RTX_Config.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(RTX_Config.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(RTX_Config.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(RTX_Config.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(RTX_Config.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(RTX_Config.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(RTX_Config.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(RTX_Config.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(RTX_Config.o)
+ .text          0x0000000000000000        0x0 rtx/librtx.a(RTX_Config.o)
+ .data          0x0000000000000000        0x0 rtx/librtx.a(RTX_Config.o)
+ .bss           0x0000000000000000        0x0 rtx/librtx.a(RTX_Config.o)
+ .debug_macro   0x0000000000000000      0xaa2 rtx/librtx.a(RTX_Config.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(RTX_Config.o)
+ .debug_macro   0x0000000000000000       0x8e rtx/librtx.a(RTX_Config.o)
+ .debug_macro   0x0000000000000000       0x51 rtx/librtx.a(RTX_Config.o)
+ .debug_macro   0x0000000000000000      0x103 rtx/librtx.a(RTX_Config.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(RTX_Config.o)
+ .debug_macro   0x0000000000000000      0x1df rtx/librtx.a(RTX_Config.o)
+ .debug_macro   0x0000000000000000      0x107 rtx/librtx.a(RTX_Config.o)
+ .debug_macro   0x0000000000000000      0x189 rtx/librtx.a(RTX_Config.o)
+ .debug_macro   0x0000000000000000       0x74 rtx/librtx.a(RTX_Config.o)
+ .debug_macro   0x0000000000000000      0x1a3 rtx/librtx.a(RTX_Config.o)
+ .debug_macro   0x0000000000000000      0x198 rtx/librtx.a(RTX_Config.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_evr.o)
+ .text          0x0000000000000000        0x0 rtx/librtx.a(rtx_evr.o)
+ .data          0x0000000000000000        0x0 rtx/librtx.a(rtx_evr.o)
+ .bss           0x0000000000000000        0x0 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelGetInfo
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelInfoRetrieved
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelGetState
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelLock
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelLocked
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelUnlock
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelUnlocked
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelRestoreLock
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelLockRestored
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelSuspend
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelSuspended
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelResume
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelResumed
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelGetTickCount
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelGetTickFreq
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelGetSysTimerCount
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxKernelGetSysTimerFreq
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadGetName
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadGetId
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadGetState
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadGetStackSize
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadGetStackSpace
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadGetPriority
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadYield
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadSuspend
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadSuspended
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadResume
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadResumed
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadDetach
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadDetached
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadJoin
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadJoinPending
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadTerminate
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadGetCount
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadEnumerate
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadFlagsError
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadFlagsSet
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadFlagsSetDone
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadFlagsClear
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadFlagsClearDone
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadFlagsGet
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadFlagsWait
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadFlagsWaitPending
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxThreadFlagsWaitNotCompleted
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxDelayError
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxDelay
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxDelayUntil
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxDelayStarted
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxDelayUntilStarted
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxTimerGetName
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxTimerStop
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxTimerStopped
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxTimerIsRunning
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxTimerDelete
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxTimerDestroyed
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsError
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsNew
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsCreated
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsGetName
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsSet
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsSetDone
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsClear
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsClearDone
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsGet
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsWait
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsWaitPending
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsWaitCompleted
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsWaitNotCompleted
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsDelete
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxEventFlagsDestroyed
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMutexError
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMutexNew
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMutexCreated
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMutexGetName
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMutexAcquire
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMutexAcquirePending
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMutexNotAcquired
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMutexRelease
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMutexGetOwner
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMutexDelete
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMutexDestroyed
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxSemaphoreError
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxSemaphoreNew
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxSemaphoreCreated
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxSemaphoreGetName
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxSemaphoreAcquire
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxSemaphoreAcquirePending
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxSemaphoreAcquired
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxSemaphoreNotAcquired
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxSemaphoreRelease
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxSemaphoreReleased
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxSemaphoreGetCount
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxSemaphoreDelete
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxSemaphoreDestroyed
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolError
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolNew
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolCreated
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolGetName
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolAlloc
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolAllocPending
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolAllocated
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolAllocFailed
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolFree
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolDeallocated
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolFreeFailed
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolGetCapacity
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolGetBlockSize
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolGetCount
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolGetSpace
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolDelete
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMemoryPoolDestroyed
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMessageQueueNew
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMessageQueueGetName
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMessageQueueGetCapacity
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMessageQueueGetMsgSize
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMessageQueueGetCount
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMessageQueueGetSpace
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMessageQueueReset
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMessageQueueResetDone
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMessageQueueDelete
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .text.EvrRtxMessageQueueDestroyed
+                0x0000000000000000        0x4 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000      0xaa2 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x75 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x2a rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x94 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x3c rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000      0x189 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x16 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x43 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x57 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x58 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000      0x1de rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000      0x369 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x35 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000      0x103 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000      0x1df rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000      0x107 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000       0x74 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000      0x1a3 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000000000      0x198 rtx/librtx.a(rtx_evr.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_msgqueue.o)
+ .text          0x0000000000000000        0x0 rtx/librtx.a(rtx_msgqueue.o)
+ .data          0x0000000000000000        0x0 rtx/librtx.a(rtx_msgqueue.o)
+ .bss           0x0000000000000000        0x0 rtx/librtx.a(rtx_msgqueue.o)
+ .text.svcRtxMessageQueueNew
+                0x0000000000000000      0x170 rtx/librtx.a(rtx_msgqueue.o)
+ .text.svcRtxMessageQueueDelete
+                0x0000000000000000       0x88 rtx/librtx.a(rtx_msgqueue.o)
+ .text.svcRtxMessageQueueGetName
+                0x0000000000000000       0x24 rtx/librtx.a(rtx_msgqueue.o)
+ .text.svcRtxMessageQueueGetCapacity
+                0x0000000000000000       0x24 rtx/librtx.a(rtx_msgqueue.o)
+ .text.svcRtxMessageQueueGetMsgSize
+                0x0000000000000000       0x24 rtx/librtx.a(rtx_msgqueue.o)
+ .text.svcRtxMessageQueueGetCount
+                0x0000000000000000       0x24 rtx/librtx.a(rtx_msgqueue.o)
+ .text.svcRtxMessageQueueGetSpace
+                0x0000000000000000       0x2c rtx/librtx.a(rtx_msgqueue.o)
+ .text.svcRtxMessageQueueReset
+                0x0000000000000000      0x198 rtx/librtx.a(rtx_msgqueue.o)
+ .text.osMessageQueueNew
+                0x0000000000000000       0x40 rtx/librtx.a(rtx_msgqueue.o)
+ .text.osMessageQueueGetName
+                0x0000000000000000       0x30 rtx/librtx.a(rtx_msgqueue.o)
+ .text.osMessageQueueGetCapacity
+                0x0000000000000000       0x44 rtx/librtx.a(rtx_msgqueue.o)
+ .text.osMessageQueueGetMsgSize
+                0x0000000000000000       0x44 rtx/librtx.a(rtx_msgqueue.o)
+ .text.osMessageQueueGetCount
+                0x0000000000000000       0x44 rtx/librtx.a(rtx_msgqueue.o)
+ .text.osMessageQueueGetSpace
+                0x0000000000000000       0x4c rtx/librtx.a(rtx_msgqueue.o)
+ .text.osMessageQueueReset
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_msgqueue.o)
+ .text.osMessageQueueDelete
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000      0xaa2 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x75 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x2a rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x94 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x3c rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000      0x189 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x16 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x43 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x57 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x58 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000      0x1de rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000      0x369 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x35 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000      0x1a3 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x2e rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000      0x103 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000      0x1df rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x1c rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000      0x107 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000     0x1011 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000      0x11f rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0xbb rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x74 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000      0x198 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000000000       0x46 rtx/librtx.a(rtx_msgqueue.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .group         0x0000000000000000        0xc rtx/librtx.a(rtx_mutex.o)
+ .text          0x0000000000000000        0x0 rtx/librtx.a(rtx_mutex.o)
+ .data          0x0000000000000000        0x0 rtx/librtx.a(rtx_mutex.o)
+ .bss           0x0000000000000000        0x0 rtx/librtx.a(rtx_mutex.o)
+ .text.svcRtxMutexNew
+                0x0000000000000000       0x90 rtx/librtx.a(rtx_mutex.o)
+ .text.svcRtxMutexAcquire
+                0x0000000000000000       0xd4 rtx/librtx.a(rtx_mutex.o)
+ .text.svcRtxMutexRelease
+                0x0000000000000000       0xf0 rtx/librtx.a(rtx_mutex.o)
+ .text.svcRtxMutexDelete
+                0x0000000000000000       0xd4 rtx/librtx.a(rtx_mutex.o)
+ .text.svcRtxMutexGetName
+                0x0000000000000000       0x24 rtx/librtx.a(rtx_mutex.o)
+ .text.svcRtxMutexGetOwner
+                0x0000000000000000       0x28 rtx/librtx.a(rtx_mutex.o)
+ .text.osMutexNew
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_mutex.o)
+ .text.osMutexGetName
+                0x0000000000000000       0x30 rtx/librtx.a(rtx_mutex.o)
+ .text.osMutexAcquire
+                0x0000000000000000       0x3c rtx/librtx.a(rtx_mutex.o)
+ .text.osMutexRelease
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_mutex.o)
+ .text.osMutexGetOwner
+                0x0000000000000000       0x30 rtx/librtx.a(rtx_mutex.o)
+ .text.osMutexDelete
+                0x0000000000000000       0x38 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000      0xaa2 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x75 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x2a rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x94 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x3c rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000      0x189 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x16 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x43 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x57 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x34 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x58 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000      0x1de rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000      0x369 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x35 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000      0x1a3 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x2e rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000      0x103 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000      0x1df rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x1c rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000      0x107 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000     0x1011 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000      0x11f rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x22 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0xbb rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x10 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x74 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000      0x198 rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x6a rtx/librtx.a(rtx_mutex.o)
+ .debug_macro   0x0000000000000000       0x46 rtx/librtx.a(rtx_mutex.o)
  .text          0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a(libm_a-w_pow.o)
  .data          0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a(libm_a-w_pow.o)
  .bss           0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a(libm_a-w_pow.o)
@@ -545,6 +1775,9 @@ Discarded input sections
  .debug_frame   0x0000000000000000       0x20 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-errno.o)
  .ARM.attributes
                 0x0000000000000000       0x34 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-errno.o)
+ .text          0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memset.o)
+ .data          0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memset.o)
+ .bss           0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memset.o)
  .text          0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-ctype_.o)
  .data          0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-ctype_.o)
  .bss           0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-ctype_.o)
@@ -594,6 +1827,8 @@ Discarded input sections
  .debug_frame   0x0000000000000000      0x13c /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-findfp.o)
  .ARM.attributes
                 0x0000000000000000       0x34 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-findfp.o)
+ .data          0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memcpy.o)
+ .bss           0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memcpy.o)
  .text          0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-stdio.o)
  .data          0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-stdio.o)
  .bss           0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-stdio.o)
@@ -646,13 +1881,6 @@ Discarded input sections
  .debug_frame   0x0000000000000000       0x48 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-mallocr.o)
  .ARM.attributes
                 0x0000000000000000       0x34 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-mallocr.o)
- .text          0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memset.o)
- .data          0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memset.o)
- .bss           0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memset.o)
- .text.memset   0x0000000000000000       0xa4 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memset.o)
- .debug_frame   0x0000000000000000       0x2c /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memset.o)
- .ARM.attributes
-                0x0000000000000000       0x34 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memset.o)
  .text          0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-lock.o)
  .data          0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-lock.o)
  .bss           0x0000000000000000        0x0 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-lock.o)
@@ -788,22 +2016,10 @@ Discarded input sections
  .debug_frame   0x0000000000000000       0x30 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldf3.o)
  .ARM.attributes
                 0x0000000000000000       0x22 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldf3.o)
- .text          0x0000000000000000      0x378 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubdf3.o)
  .data          0x0000000000000000        0x0 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubdf3.o)
  .bss           0x0000000000000000        0x0 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubdf3.o)
- .debug_line_str
-                0x0000000000000000       0xc7 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubdf3.o)
- .debug_frame   0x0000000000000000       0xac /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubdf3.o)
- .ARM.attributes
-                0x0000000000000000       0x22 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubdf3.o)
- .text          0x0000000000000000      0x424 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldivdf3.o)
  .data          0x0000000000000000        0x0 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldivdf3.o)
  .bss           0x0000000000000000        0x0 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldivdf3.o)
- .debug_line_str
-                0x0000000000000000       0xc7 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldivdf3.o)
- .debug_frame   0x0000000000000000       0x50 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldivdf3.o)
- .ARM.attributes
-                0x0000000000000000       0x22 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldivdf3.o)
  .text          0x0000000000000000      0x110 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_cmpdf2.o)
  .data          0x0000000000000000        0x0 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_cmpdf2.o)
  .bss           0x0000000000000000        0x0 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_cmpdf2.o)
@@ -820,14 +2036,8 @@ Discarded input sections
  .debug_frame   0x0000000000000000       0x20 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_unorddf2.o)
  .ARM.attributes
                 0x0000000000000000       0x22 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_unorddf2.o)
- .text          0x0000000000000000       0x50 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
  .data          0x0000000000000000        0x0 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
  .bss           0x0000000000000000        0x0 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
- .debug_line_str
-                0x0000000000000000       0xc7 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
- .debug_frame   0x0000000000000000       0x24 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
- .ARM.attributes
-                0x0000000000000000       0x22 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
  .text          0x0000000000000000       0x40 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixunsdfsi.o)
  .data          0x0000000000000000        0x0 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixunsdfsi.o)
  .bss           0x0000000000000000        0x0 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixunsdfsi.o)
@@ -847,158 +2057,573 @@ SRAM             0x0000000020000000 0x0000000000020000 xrw
 Linker script and memory map
 
 
-.text           0x0000000000000000      0x78c
+.text           0x0000000000000000     0x3440
  *(.vectors)
  .vectors       0x0000000000000000      0x200 startup.o
                 0x0000000000000000                vector_table
  *(.text*)
+ .text.app_main
+                0x0000000000000200       0x30 main.o
+                0x0000000000000200                app_main
+ .text.task1    0x0000000000000230       0x58 main.o
+ .text.timer_callback
+                0x0000000000000288       0x48 main.o
+                0x0000000000000288                timer_callback
  .text.startup.main
-                0x0000000000000200       0x10 main.o
-                0x0000000000000200                main
+                0x00000000000002d0       0x34 main.o
+                0x00000000000002d0                main
  .text.UsageFaultHandler
-                0x0000000000000210        0xc startup.o
- .text.BusFaultHandler
-                0x000000000000021c        0xc startup.o
- .text.HardFaultHandler
-                0x0000000000000228        0xc startup.o
- .text.IntDefaultHandler
-                0x0000000000000234        0xc startup.o
- .text.SysTick_Handler
-                0x0000000000000240        0xc startup.o
-                0x0000000000000240                SysTick_Handler
- .text.ResetISR
-                0x000000000000024c       0xac startup.o
-                0x000000000000024c                ResetISR
- .text.SVC_Handler
-                0x00000000000002f8        0xc startup.o
-                0x00000000000002f8                SVC_Handler
- .text.PendSV_Handler
                 0x0000000000000304        0xc startup.o
-                0x0000000000000304                PendSV_Handler
+ .text.BusFaultHandler
+                0x0000000000000310        0xc startup.o
+ .text.HardFaultHandler
+                0x000000000000031c        0xc startup.o
+ .text.IntDefaultHandler
+                0x0000000000000328        0xc startup.o
+ .text.ResetISR
+                0x0000000000000334       0xac startup.o
+                0x0000000000000334                ResetISR
  .text.SystemInit
-                0x0000000000000310       0x30 lib/libbsp.a(system.o)
-                0x0000000000000310                SystemInit
+                0x00000000000003e0       0x30 lib/libbsp.a(system.o)
+                0x00000000000003e0                SystemInit
  .text.delay_us.constprop.0
-                0x0000000000000340       0x84 lib/libbsp.a(board.o)
+                0x0000000000000410       0x84 lib/libbsp.a(board.o)
  .text.led_blink
-                0x00000000000003c4       0x60 lib/libbsp.a(board.o)
-                0x00000000000003c4                led_blink
+                0x0000000000000494       0x60 lib/libbsp.a(board.o)
+                0x0000000000000494                led_blink
+ .text.serial_init
+                0x00000000000004f4       0x50 lib/libbsp.a(serial.o)
+                0x00000000000004f4                serial_init
+ .text.puts     0x0000000000000544       0x28 lib/libbsp.a(serial.o)
+                0x0000000000000544                puts
+ .text.gpio_in  0x000000000000056c       0x18 lib/libbsp.a(gpio.o)
+                0x000000000000056c                gpio_in
+ .text.gpio_out
+                0x0000000000000584       0x38 lib/libbsp.a(gpio.o)
+                0x0000000000000584                gpio_out
  .text.gpio_set
-                0x0000000000000424       0x1c lib/libbsp.a(gpio.o)
-                0x0000000000000424                gpio_set
+                0x00000000000005bc       0x1c lib/libbsp.a(gpio.o)
+                0x00000000000005bc                gpio_set
  .text.gpio_clear
-                0x0000000000000440       0x1c lib/libbsp.a(gpio.o)
-                0x0000000000000440                gpio_clear
+                0x00000000000005d8       0x1c lib/libbsp.a(gpio.o)
+                0x00000000000005d8                gpio_clear
  .text.GPIOTE_IRQHandler
-                0x000000000000045c       0x50 lib/libbsp.a(gpio.o)
-                0x000000000000045c                GPIOTE_IRQHandler
+                0x00000000000005f4       0x50 lib/libbsp.a(gpio.o)
+                0x00000000000005f4                GPIOTE_IRQHandler
  .text.buggy_init
-                0x00000000000004ac       0x18 lib/libbsp.a(buggy.o)
-                0x00000000000004ac                buggy_init
+                0x0000000000000644       0x18 lib/libbsp.a(buggy.o)
+                0x0000000000000644                buggy_init
+ *fill*         0x000000000000065c        0x4 
+ .text.buggy_move_forward
+                0x0000000000000660       0x50 lib/libbsp.a(buggy.o)
+                0x0000000000000660                buggy_move_forward
+ .text.buggy_move_reverse
+                0x00000000000006b0       0x50 lib/libbsp.a(buggy.o)
+                0x00000000000006b0                buggy_move_reverse
  .text.buggy_spin_left
-                0x00000000000004c4       0x1c lib/libbsp.a(buggy.o)
-                0x00000000000004c4                buggy_spin_left
+                0x0000000000000700       0x1c lib/libbsp.a(buggy.o)
+                0x0000000000000700                buggy_spin_left
+ .text.buggy_spin_right
+                0x000000000000071c       0x1c lib/libbsp.a(buggy.o)
+                0x000000000000071c                buggy_spin_right
+ .text.buggy_stop
+                0x0000000000000738       0x14 lib/libbsp.a(buggy.o)
+                0x0000000000000738                buggy_stop
+ *fill*         0x000000000000074c        0x4 
  .text.init_channel_registers
-                0x00000000000004e0      0x180 lib/libbsp.a(pwm.o)
-                0x00000000000004e0                init_channel_registers
+                0x0000000000000750      0x180 lib/libbsp.a(pwm.o)
+                0x0000000000000750                init_channel_registers
  .text.pwm_init
-                0x0000000000000660       0x2c lib/libbsp.a(pwm.o)
-                0x0000000000000660                pwm_init
+                0x00000000000008d0       0x2c lib/libbsp.a(pwm.o)
+                0x00000000000008d0                pwm_init
+ .text.pwm_off  0x00000000000008fc       0x20 lib/libbsp.a(pwm.o)
+                0x00000000000008fc                pwm_off
  .text.pwm_pulse5ms
-                0x000000000000068c       0x44 lib/libbsp.a(pwm.o)
-                0x000000000000068c                pwm_pulse5ms
+                0x000000000000091c       0x44 lib/libbsp.a(pwm.o)
+                0x000000000000091c                pwm_pulse5ms
+ .text.svcRtxKernelInitialize
+                0x0000000000000960      0x15c rtx/librtx.a(rtx_kernel.o)
+ .text.svcRtxKernelStart
+                0x0000000000000abc       0xb8 rtx/librtx.a(rtx_kernel.o)
+ .text.osRtxKernelBeforeInit
+                0x0000000000000b74        0x4 rtx/librtx.a(rtx_kernel.o)
+                0x0000000000000b74                osRtxKernelBeforeInit
+ .text.osRtxKernelErrorNotify
+                0x0000000000000b78       0x18 rtx/librtx.a(rtx_kernel.o)
+                0x0000000000000b78                osRtxKernelErrorNotify
+ .text.osKernelInitialize
+                0x0000000000000b90       0x38 rtx/librtx.a(rtx_kernel.o)
+                0x0000000000000b90                osKernelInitialize
+ .text.osKernelStart
+                0x0000000000000bc8       0x34 rtx/librtx.a(rtx_kernel.o)
+                0x0000000000000bc8                osKernelStart
+ .text.osRtxMemoryInit
+                0x0000000000000bfc       0x44 rtx/librtx.a(rtx_memory.o)
+                0x0000000000000bfc                osRtxMemoryInit
+ .text.osRtxMemoryAlloc
+                0x0000000000000c40       0x90 rtx/librtx.a(rtx_memory.o)
+                0x0000000000000c40                osRtxMemoryAlloc
+ .text.osRtxMemoryFree
+                0x0000000000000cd0       0x4c rtx/librtx.a(rtx_memory.o)
+                0x0000000000000cd0                osRtxMemoryFree
+ .text.osRtxMemoryPoolInit
+                0x0000000000000d1c       0x64 rtx/librtx.a(rtx_mempool.o)
+                0x0000000000000d1c                osRtxMemoryPoolInit
+ .text.osRtxMemoryPoolAlloc
+                0x0000000000000d80       0x48 rtx/librtx.a(rtx_mempool.o)
+                0x0000000000000d80                osRtxMemoryPoolAlloc
+ .text.osRtxMemoryPoolFree
+                0x0000000000000dc8       0x60 rtx/librtx.a(rtx_mempool.o)
+                0x0000000000000dc8                osRtxMemoryPoolFree
+ .text.osRtxTick_Handler
+                0x0000000000000e28       0x80 rtx/librtx.a(rtx_system.o)
+                0x0000000000000e28                osRtxTick_Handler
+ .text.osRtxPendSV_Handler
+                0x0000000000000ea8       0xa8 rtx/librtx.a(rtx_system.o)
+                0x0000000000000ea8                osRtxPendSV_Handler
+ .text.osRtxPostProcess
+                0x0000000000000f50       0x74 rtx/librtx.a(rtx_system.o)
+                0x0000000000000f50                osRtxPostProcess
+ .text.osRtxThreadWaitEnter.part.0
+                0x0000000000000fc4       0xa4 rtx/librtx.a(rtx_thread.o)
+ .text.osRtxThreadListPut
+                0x0000000000001068       0x34 rtx/librtx.a(rtx_thread.o)
+                0x0000000000001068                osRtxThreadListPut
+ .text.osRtxThreadListGet
+                0x000000000000109c       0x14 rtx/librtx.a(rtx_thread.o)
+                0x000000000000109c                osRtxThreadListGet
+ .text.osRtxThreadListSort
+                0x00000000000010b0       0x5c rtx/librtx.a(rtx_thread.o)
+                0x00000000000010b0                osRtxThreadListSort
+ .text.osRtxThreadListRemove
+                0x000000000000110c       0x14 rtx/librtx.a(rtx_thread.o)
+                0x000000000000110c                osRtxThreadListRemove
+ .text.osRtxThreadReadyPut
+                0x0000000000001120       0x44 rtx/librtx.a(rtx_thread.o)
+                0x0000000000001120                osRtxThreadReadyPut
+ .text.osRtxThreadDelayTick
+                0x0000000000001164      0x15c rtx/librtx.a(rtx_thread.o)
+                0x0000000000001164                osRtxThreadDelayTick
+ .text.osRtxThreadRegPtr
+                0x00000000000012c0       0x14 rtx/librtx.a(rtx_thread.o)
+                0x00000000000012c0                osRtxThreadRegPtr
+ .text.osRtxThreadSwitch
+                0x00000000000012d4       0x10 rtx/librtx.a(rtx_thread.o)
+                0x00000000000012d4                osRtxThreadSwitch
+ .text.osRtxThreadDispatch
+                0x00000000000012e4      0x108 rtx/librtx.a(rtx_thread.o)
+                0x00000000000012e4                osRtxThreadDispatch
+ .text.svcRtxThreadNew
+                0x00000000000013ec      0x2f0 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadSetPriority
+                0x00000000000016dc       0xb4 rtx/librtx.a(rtx_thread.o)
+ .text.osRtxThreadWaitExit
+                0x0000000000001790       0xb8 rtx/librtx.a(rtx_thread.o)
+                0x0000000000001790                osRtxThreadWaitExit
+ .text.osRtxThreadPostProcess
+                0x0000000000001848       0x94 rtx/librtx.a(rtx_thread.o)
+ .text.osRtxThreadWaitEnter
+                0x00000000000018dc       0x18 rtx/librtx.a(rtx_thread.o)
+                0x00000000000018dc                osRtxThreadWaitEnter
+ .text.osRtxThreadBeforeFree
+                0x00000000000018f4        0x4 rtx/librtx.a(rtx_thread.o)
+                0x00000000000018f4                osRtxThreadBeforeFree
+ .text.osRtxThreadFree
+                0x00000000000018f8       0x5c rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxThreadExit
+                0x0000000000001954      0x124 rtx/librtx.a(rtx_thread.o)
+ .text.osRtxThreadStartup
+                0x0000000000001a78       0x44 rtx/librtx.a(rtx_thread.o)
+                0x0000000000001a78                osRtxThreadStartup
+ .text.osThreadNew
+                0x0000000000001abc       0x40 rtx/librtx.a(rtx_thread.o)
+                0x0000000000001abc                osThreadNew
+ .text.osThreadSetPriority
+                0x0000000000001afc       0x3c rtx/librtx.a(rtx_thread.o)
+                0x0000000000001afc                osThreadSetPriority
+ .text.osThreadExit
+                0x0000000000001b38       0x1c rtx/librtx.a(rtx_thread.o)
+                0x0000000000001b38                osThreadExit
+ .text.osThreadEntry
+                0x0000000000001b54        0x8 rtx/librtx.a(rtx_thread.o)
+ .text.svcRtxTimerNew
+                0x0000000000001b5c       0xac rtx/librtx.a(rtx_timer.o)
+ .text.svcRtxTimerStart
+                0x0000000000001c08       0xc4 rtx/librtx.a(rtx_timer.o)
+ .text.osRtxTimerTick
+                0x0000000000001ccc       0xc0 rtx/librtx.a(rtx_timer.o)
+ .text.osRtxTimerSetup
+                0x0000000000001d8c       0x20 rtx/librtx.a(rtx_timer.o)
+                0x0000000000001d8c                osRtxTimerSetup
+ .text.osRtxTimerThread
+                0x0000000000001dac       0x28 rtx/librtx.a(rtx_timer.o)
+                0x0000000000001dac                osRtxTimerThread
+ .text.osTimerNew
+                0x0000000000001dd4       0x44 rtx/librtx.a(rtx_timer.o)
+                0x0000000000001dd4                osTimerNew
+ .text.osTimerStart
+                0x0000000000001e18       0x3c rtx/librtx.a(rtx_timer.o)
+                0x0000000000001e18                osTimerStart
+ .text          0x0000000000001e54       0xc8 rtx/librtx.a(irq_armv7m.o)
+                0x0000000000001e54                SVC_Handler
+                0x0000000000001eee                PendSV_Handler
+                0x0000000000001efe                SysTick_Handler
+ .text.OS_Tick_Setup
+                0x0000000000001f1c       0x4c rtx/librtx.a(os_systick.o)
+                0x0000000000001f1c                OS_Tick_Setup
+ .text.OS_Tick_Enable
+                0x0000000000001f68       0x28 rtx/librtx.a(os_systick.o)
+                0x0000000000001f68                OS_Tick_Enable
+ .text.OS_Tick_AcknowledgeIRQ
+                0x0000000000001f90        0x8 rtx/librtx.a(os_systick.o)
+                0x0000000000001f90                OS_Tick_AcknowledgeIRQ
+ .text.OS_Tick_GetIRQn
+                0x0000000000001f98        0x8 rtx/librtx.a(os_systick.o)
+                0x0000000000001f98                OS_Tick_GetIRQn
+ .text.osRtxIdleThread
+                0x0000000000001fa0        0x4 rtx/librtx.a(RTX_Config.o)
+                0x0000000000001fa0                osRtxIdleThread
+ .text.osRtxErrorNotify
+                0x0000000000001fa4        0x4 rtx/librtx.a(RTX_Config.o)
+                0x0000000000001fa4                osRtxErrorNotify
+ .text.EvrRtxMemoryInit
+                0x0000000000001fa8        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fa8                EvrRtxMemoryInit
+ .text.EvrRtxMemoryAlloc
+                0x0000000000001fac        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fac                EvrRtxMemoryAlloc
+ .text.EvrRtxMemoryFree
+                0x0000000000001fb0        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fb0                EvrRtxMemoryFree
+ .text.EvrRtxMemoryBlockInit
+                0x0000000000001fb4        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fb4                EvrRtxMemoryBlockInit
+ .text.EvrRtxMemoryBlockAlloc
+                0x0000000000001fb8        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fb8                EvrRtxMemoryBlockAlloc
+ .text.EvrRtxMemoryBlockFree
+                0x0000000000001fbc        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fbc                EvrRtxMemoryBlockFree
+ .text.EvrRtxKernelError
+                0x0000000000001fc0        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fc0                EvrRtxKernelError
+ .text.EvrRtxKernelInitialize
+                0x0000000000001fc4        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fc4                EvrRtxKernelInitialize
+ .text.EvrRtxKernelInitialized
+                0x0000000000001fc8        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fc8                EvrRtxKernelInitialized
+ .text.EvrRtxKernelStart
+                0x0000000000001fcc        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fcc                EvrRtxKernelStart
+ .text.EvrRtxKernelStarted
+                0x0000000000001fd0        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fd0                EvrRtxKernelStarted
+ .text.EvrRtxKernelErrorNotify
+                0x0000000000001fd4        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fd4                EvrRtxKernelErrorNotify
+ .text.EvrRtxThreadError
+                0x0000000000001fd8        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fd8                EvrRtxThreadError
+ .text.EvrRtxThreadNew
+                0x0000000000001fdc        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fdc                EvrRtxThreadNew
+ .text.EvrRtxThreadCreated
+                0x0000000000001fe0        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fe0                EvrRtxThreadCreated
+ .text.EvrRtxThreadSetPriority
+                0x0000000000001fe4        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fe4                EvrRtxThreadSetPriority
+ .text.EvrRtxThreadPriorityUpdated
+                0x0000000000001fe8        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fe8                EvrRtxThreadPriorityUpdated
+ .text.EvrRtxThreadJoined
+                0x0000000000001fec        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001fec                EvrRtxThreadJoined
+ .text.EvrRtxThreadBlocked
+                0x0000000000001ff0        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001ff0                EvrRtxThreadBlocked
+ .text.EvrRtxThreadUnblocked
+                0x0000000000001ff4        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001ff4                EvrRtxThreadUnblocked
+ .text.EvrRtxThreadPreempted
+                0x0000000000001ff8        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001ff8                EvrRtxThreadPreempted
+ .text.EvrRtxThreadSwitched
+                0x0000000000001ffc        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000001ffc                EvrRtxThreadSwitched
+ .text.EvrRtxThreadExit
+                0x0000000000002000        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002000                EvrRtxThreadExit
+ .text.EvrRtxThreadDestroyed
+                0x0000000000002004        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002004                EvrRtxThreadDestroyed
+ .text.EvrRtxThreadFlagsWaitTimeout
+                0x0000000000002008        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002008                EvrRtxThreadFlagsWaitTimeout
+ .text.EvrRtxThreadFlagsWaitCompleted
+                0x000000000000200c        0x4 rtx/librtx.a(rtx_evr.o)
+                0x000000000000200c                EvrRtxThreadFlagsWaitCompleted
+ .text.EvrRtxDelayCompleted
+                0x0000000000002010        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002010                EvrRtxDelayCompleted
+ .text.EvrRtxTimerError
+                0x0000000000002014        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002014                EvrRtxTimerError
+ .text.EvrRtxTimerCallback
+                0x0000000000002018        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002018                EvrRtxTimerCallback
+ .text.EvrRtxTimerNew
+                0x000000000000201c        0x4 rtx/librtx.a(rtx_evr.o)
+                0x000000000000201c                EvrRtxTimerNew
+ .text.EvrRtxTimerCreated
+                0x0000000000002020        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002020                EvrRtxTimerCreated
+ .text.EvrRtxTimerStart
+                0x0000000000002024        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002024                EvrRtxTimerStart
+ .text.EvrRtxTimerStarted
+                0x0000000000002028        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002028                EvrRtxTimerStarted
+ .text.EvrRtxEventFlagsWaitTimeout
+                0x000000000000202c        0x4 rtx/librtx.a(rtx_evr.o)
+                0x000000000000202c                EvrRtxEventFlagsWaitTimeout
+ .text.EvrRtxMutexAcquireTimeout
+                0x0000000000002030        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002030                EvrRtxMutexAcquireTimeout
+ .text.EvrRtxMutexAcquired
+                0x0000000000002034        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002034                EvrRtxMutexAcquired
+ .text.EvrRtxMutexReleased
+                0x0000000000002038        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002038                EvrRtxMutexReleased
+ .text.EvrRtxSemaphoreAcquireTimeout
+                0x000000000000203c        0x4 rtx/librtx.a(rtx_evr.o)
+                0x000000000000203c                EvrRtxSemaphoreAcquireTimeout
+ .text.EvrRtxMemoryPoolAllocTimeout
+                0x0000000000002040        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002040                EvrRtxMemoryPoolAllocTimeout
+ .text.EvrRtxMessageQueueError
+                0x0000000000002044        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002044                EvrRtxMessageQueueError
+ .text.EvrRtxMessageQueueCreated
+                0x0000000000002048        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002048                EvrRtxMessageQueueCreated
+ .text.EvrRtxMessageQueuePut
+                0x000000000000204c        0x4 rtx/librtx.a(rtx_evr.o)
+                0x000000000000204c                EvrRtxMessageQueuePut
+ .text.EvrRtxMessageQueuePutPending
+                0x0000000000002050        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002050                EvrRtxMessageQueuePutPending
+ .text.EvrRtxMessageQueuePutTimeout
+                0x0000000000002054        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002054                EvrRtxMessageQueuePutTimeout
+ .text.EvrRtxMessageQueueInsertPending
+                0x0000000000002058        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002058                EvrRtxMessageQueueInsertPending
+ .text.EvrRtxMessageQueueInserted
+                0x000000000000205c        0x4 rtx/librtx.a(rtx_evr.o)
+                0x000000000000205c                EvrRtxMessageQueueInserted
+ .text.EvrRtxMessageQueueNotInserted
+                0x0000000000002060        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002060                EvrRtxMessageQueueNotInserted
+ .text.EvrRtxMessageQueueGet
+                0x0000000000002064        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002064                EvrRtxMessageQueueGet
+ .text.EvrRtxMessageQueueGetPending
+                0x0000000000002068        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002068                EvrRtxMessageQueueGetPending
+ .text.EvrRtxMessageQueueGetTimeout
+                0x000000000000206c        0x4 rtx/librtx.a(rtx_evr.o)
+                0x000000000000206c                EvrRtxMessageQueueGetTimeout
+ .text.EvrRtxMessageQueueRetrieved
+                0x0000000000002070        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002070                EvrRtxMessageQueueRetrieved
+ .text.EvrRtxMessageQueueNotRetrieved
+                0x0000000000002074        0x4 rtx/librtx.a(rtx_evr.o)
+                0x0000000000002074                EvrRtxMessageQueueNotRetrieved
+ .text.svcRtxMessageQueuePut
+                0x0000000000002078      0x12c rtx/librtx.a(rtx_msgqueue.o)
+ .text.osRtxMessageQueuePostProcess
+                0x00000000000021a4      0x18c rtx/librtx.a(rtx_msgqueue.o)
+ .text.svcRtxMessageQueueGet
+                0x0000000000002330      0x1c4 rtx/librtx.a(rtx_msgqueue.o)
+ .text.osRtxMessageQueueTimerSetup
+                0x00000000000024f4      0x184 rtx/librtx.a(rtx_msgqueue.o)
+                0x00000000000024f4                osRtxMessageQueueTimerSetup
+ .text.osMessageQueuePut
+                0x0000000000002678       0x9c rtx/librtx.a(rtx_msgqueue.o)
+                0x0000000000002678                osMessageQueuePut
+ .text.osMessageQueueGet
+                0x0000000000002714       0xe0 rtx/librtx.a(rtx_msgqueue.o)
+                0x0000000000002714                osMessageQueueGet
+ .text.osRtxMutexOwnerRelease
+                0x00000000000027f4       0x64 rtx/librtx.a(rtx_mutex.o)
+                0x00000000000027f4                osRtxMutexOwnerRelease
+ .text.osRtxMutexOwnerRestore
+                0x0000000000002858       0x40 rtx/librtx.a(rtx_mutex.o)
+                0x0000000000002858                osRtxMutexOwnerRestore
+ .text.memset   0x0000000000002898       0xa4 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memset.o)
+                0x0000000000002898                memset
+ .text          0x000000000000293c      0x134 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memcpy.o)
+                0x000000000000293c                memcpy
+ .text          0x0000000000002a70      0x378 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubdf3.o)
+                0x0000000000002a70                __aeabi_drsub
+                0x0000000000002a78                __aeabi_dsub
+                0x0000000000002a78                __subdf3
+                0x0000000000002a7c                __adddf3
+                0x0000000000002a7c                __aeabi_dadd
+                0x0000000000002cf4                __aeabi_ui2d
+                0x0000000000002cf4                __floatunsidf
+                0x0000000000002d14                __floatsidf
+                0x0000000000002d14                __aeabi_i2d
+                0x0000000000002d38                __extendsfdf2
+                0x0000000000002d38                __aeabi_f2d
+                0x0000000000002d7c                __aeabi_ul2d
+                0x0000000000002d7c                __floatundidf
+                0x0000000000002d8c                __floatdidf
+                0x0000000000002d8c                __aeabi_l2d
+ .text          0x0000000000002de8      0x424 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldivdf3.o)
+                0x0000000000002de8                __aeabi_dmul
+                0x0000000000002de8                __muldf3
+                0x000000000000303c                __aeabi_ddiv
+                0x000000000000303c                __divdf3
+ .text          0x000000000000320c       0x50 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
+                0x000000000000320c                __fixdfsi
+                0x000000000000320c                __aeabi_d2iz
  *(.rodata*)
+ .rodata.task1.str1.4
+                0x000000000000325c        0xd main.o
+ *fill*         0x0000000000003269        0x3 
  .rodata.led_cols
-                0x00000000000006d0        0x5 lib/libbsp.a(board.o)
-                0x00000000000006d0                led_cols
- *fill*         0x00000000000006d5        0x3 
+                0x000000000000326c        0x5 lib/libbsp.a(board.o)
+                0x000000000000326c                led_cols
+ *fill*         0x0000000000003271        0x3 
  .rodata.led_rows
-                0x00000000000006d8        0x5 lib/libbsp.a(board.o)
-                0x00000000000006d8                led_rows
- *fill*         0x00000000000006dd        0x3 
+                0x0000000000003274        0x5 lib/libbsp.a(board.o)
+                0x0000000000003274                led_rows
+ *fill*         0x0000000000003279        0x3 
  .rodata.CSWTCH.16
-                0x00000000000006e0        0xc lib/libbsp.a(pwm.o)
+                0x000000000000327c        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.15
-                0x00000000000006ec        0xc lib/libbsp.a(pwm.o)
+                0x0000000000003288        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.14
-                0x00000000000006f8        0xc lib/libbsp.a(pwm.o)
+                0x0000000000003294        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.13
-                0x0000000000000704        0xc lib/libbsp.a(pwm.o)
+                0x00000000000032a0        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.12
-                0x0000000000000710        0xc lib/libbsp.a(pwm.o)
+                0x00000000000032ac        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.11
-                0x000000000000071c        0xc lib/libbsp.a(pwm.o)
+                0x00000000000032b8        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.10
-                0x0000000000000728        0xc lib/libbsp.a(pwm.o)
+                0x00000000000032c4        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.9
-                0x0000000000000734        0xc lib/libbsp.a(pwm.o)
+                0x00000000000032d0        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.8
-                0x0000000000000740        0xc lib/libbsp.a(pwm.o)
+                0x00000000000032dc        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.7
-                0x000000000000074c        0xc lib/libbsp.a(pwm.o)
+                0x00000000000032e8        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.6
-                0x0000000000000758        0xc lib/libbsp.a(pwm.o)
+                0x00000000000032f4        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.5
-                0x0000000000000764        0xc lib/libbsp.a(pwm.o)
+                0x0000000000003300        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.4
-                0x0000000000000770        0xc lib/libbsp.a(pwm.o)
+                0x000000000000330c        0xc lib/libbsp.a(pwm.o)
  .rodata.PWM_PSEL_OFFSET
-                0x000000000000077c       0x10 lib/libbsp.a(pwm.o)
-                0x000000000000078c                . = ALIGN (0x4)
-                0x000000000000078c                __etext = .
+                0x0000000000003318       0x10 lib/libbsp.a(pwm.o)
+ .rodata.svcRtxKernelGetInfo.str1.4
+                0x0000000000003328        0xb rtx/librtx.a(rtx_kernel.o)
+ *fill*         0x0000000000003333        0x1 
+ .rodata        0x0000000000003334       0xa8 rtx/librtx.a(rtx_lib.o)
+                0x0000000000003334                os_cb_sections
+                0x000000000000336c                osRtxConfig
+ .rodata.osRtxUserSVC
+                0x00000000000033dc        0x4 rtx/librtx.a(rtx_lib.o)
+                0x00000000000033dc                osRtxUserSVC
+ .rodata.os_timer_mq_attr
+                0x00000000000033e0       0x18 rtx/librtx.a(rtx_lib.o)
+ .rodata.os_timer_thread_attr
+                0x00000000000033f8       0x24 rtx/librtx.a(rtx_lib.o)
+ .rodata.os_idle_thread_attr
+                0x000000000000341c       0x24 rtx/librtx.a(rtx_lib.o)
+                0x0000000000003440                . = ALIGN (0x4)
+                0x0000000000003440                __etext = .
 
-.glue_7         0x000000000000078c        0x0
- .glue_7        0x000000000000078c        0x0 linker stubs
+.glue_7         0x0000000000003440        0x0
+ .glue_7        0x0000000000003440        0x0 linker stubs
 
-.glue_7t        0x000000000000078c        0x0
- .glue_7t       0x000000000000078c        0x0 linker stubs
+.glue_7t        0x0000000000003440        0x0
+ .glue_7t       0x0000000000003440        0x0 linker stubs
 
-.vfp11_veneer   0x000000000000078c        0x0
- .vfp11_veneer  0x000000000000078c        0x0 linker stubs
+.vfp11_veneer   0x0000000000003440        0x0
+ .vfp11_veneer  0x0000000000003440        0x0 linker stubs
 
-.v4_bx          0x000000000000078c        0x0
- .v4_bx         0x000000000000078c        0x0 linker stubs
+.v4_bx          0x0000000000003440        0x0
+ .v4_bx         0x0000000000003440        0x0 linker stubs
 
-.iplt           0x000000000000078c        0x0
- .iplt          0x000000000000078c        0x0 main.o
+.iplt           0x0000000000003440        0x0
+ .iplt          0x0000000000003440        0x0 main.o
 
-.rel.dyn        0x000000000000078c        0x0
- .rel.iplt      0x000000000000078c        0x0 main.o
+.rel.dyn        0x0000000000003440        0x0
+ .rel.iplt      0x0000000000003440        0x0 main.o
 
-.data           0x0000000020000000        0x0 load address 0x000000000000078c
-                0x000000000000078c                __data_load__ = LOADADDR (.data)
+.data           0x0000000020000000       0xa4 load address 0x0000000000003440
+                0x0000000000003440                __data_load__ = LOADADDR (.data)
                 0x0000000020000000                __data_start__ = .
                 0x0000000020000000                . = ALIGN (0x4)
  *(.data*)
-                0x0000000020000000                . = ALIGN (0x4)
-                0x0000000020000000                __data_end__ = .
+ .data.os       0x0000000020000000       0xa4 rtx/librtx.a(rtx_kernel.o)
+                0x0000000020000000                osRtxInfo
+                0x00000000200000a4                . = ALIGN (0x4)
+                0x00000000200000a4                __data_end__ = .
 
-.igot.plt       0x0000000020000000        0x0
- .igot.plt      0x0000000020000000        0x0 main.o
+.igot.plt       0x00000000200000a4        0x0 load address 0x00000000000034e4
+ .igot.plt      0x00000000200000a4        0x0 main.o
 
-.bss            0x0000000020000000      0x12c
-                0x0000000020000000                __bss_start__ = .
-                0x0000000020000000                . = ALIGN (0x4)
+.bss            0x00000000200000a8     0x868c load address 0x00000000000034e8
+                0x00000000200000a8                __bss_start__ = .
+                0x00000000200000a8                . = ALIGN (0x4)
  *(.bss*)
+ .bss.next_state
+                0x00000000200000a8        0x4 main.o
+                0x00000000200000a8                next_state
+ .bss.current_state
+                0x00000000200000ac        0x4 main.o
+                0x00000000200000ac                current_state
+ .bss.count     0x00000000200000b0        0x4 main.o
  .bss.SystemCoreClock
-                0x0000000020000000        0x4 lib/libbsp.a(system.o)
-                0x0000000020000000                SystemCoreClock
+                0x00000000200000b4        0x4 lib/libbsp.a(system.o)
+                0x00000000200000b4                SystemCoreClock
  .bss.gpio_irq_event_counters
-                0x0000000020000004       0x20 lib/libbsp.a(gpio.o)
-                0x0000000020000004                gpio_irq_event_counters
+                0x00000000200000b8       0x20 lib/libbsp.a(gpio.o)
+                0x00000000200000b8                gpio_irq_event_counters
  .bss.gpio_irq_counter
-                0x0000000020000024        0x4 lib/libbsp.a(gpio.o)
-                0x0000000020000024                gpio_irq_counter
+                0x00000000200000d8        0x4 lib/libbsp.a(gpio.o)
+                0x00000000200000d8                gpio_irq_counter
  .bss.event_callbacks
-                0x0000000020000028       0x20 lib/libbsp.a(gpio.o)
-                0x0000000020000028                event_callbacks
- .bss.channel   0x0000000020000048       0xe0 lib/libbsp.a(pwm.o)
-                0x0000000020000048                channel
+                0x00000000200000dc       0x20 lib/libbsp.a(gpio.o)
+                0x00000000200000dc                event_callbacks
+ *fill*         0x00000000200000fc        0x4 
+ .bss.channel   0x0000000020000100       0xe0 lib/libbsp.a(pwm.o)
+                0x0000000020000100                channel
  .bss.s_sequence
-                0x0000000020000128        0x4 lib/libbsp.a(pwm.o)
+                0x00000000200001e0        0x4 lib/libbsp.a(pwm.o)
+ .bss.os.msgqueue.mem
+                0x00000000200001e4       0x50 rtx/librtx.a(rtx_lib.o)
+ .bss.os.msgqueue.cb
+                0x0000000020000234       0x34 rtx/librtx.a(rtx_lib.o)
+ .bss.os.thread.timer.stack
+                0x0000000020000268      0x200 rtx/librtx.a(rtx_lib.o)
+ .bss.os.thread.cb
+                0x0000000020000468       0x88 rtx/librtx.a(rtx_lib.o)
+ .bss.os.thread.idle.stack
+                0x00000000200004f0      0x200 rtx/librtx.a(rtx_lib.o)
+ .bss.os        0x00000000200006f0     0x8040 rtx/librtx.a(rtx_lib.o)
+ .bss.os        0x0000000020008730        0x1 rtx/librtx.a(os_systick.o)
  *(COMMON)
-                0x000000002000012c                . = ALIGN (0x4)
-                0x000000002000012c                __bss_end__ = .
+                0x0000000020008734                . = ALIGN (0x4)
+ *fill*         0x0000000020008731        0x3 
+                0x0000000020008734                __bss_end__ = .
 
 .heap           0x0000000000000000        0x0
                 0x0000000000000000                __heap_start__ = .
@@ -1007,14 +2632,14 @@ Linker script and memory map
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __heap_end__ = .
 
-.stack          0x000000002000012c     0x2000
-                0x000000002000012c                __stack_start__ = .
-                0x000000002000012c                . = ALIGN (0x4)
-                0x000000002000212c                __stack_size__ = 0x2000
+.stack          0x0000000020008734     0x2000 load address 0x000000000000bb74
+                0x0000000020008734                __stack_start__ = .
+                0x0000000020008734                . = ALIGN (0x4)
+                0x000000002000a734                __stack_size__ = 0x2000
                 0x0000000000002000                . = (. + __stack_size__)
- *fill*         0x000000002000012c     0x2000 
-                0x000000002000212c                . = ALIGN (0x4)
-                0x000000002000212c                __stack_end__ = .
+ *fill*         0x0000000020008734     0x2000 
+                0x000000002000a734                . = ALIGN (0x4)
+                0x000000002000a734                __stack_end__ = .
 LOAD main.o
 LOAD startup.o
 LOAD lib/libbsp.a
@@ -1025,105 +2650,313 @@ LOAD /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a
 OUTPUT(MICROBIT.out elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x0000000000000000     0x205a
- .debug_info    0x0000000000000000       0xb2 main.o
- .debug_info    0x00000000000000b2      0x2d0 startup.o
- .debug_info    0x0000000000000382       0x75 lib/libbsp.a(system.o)
- .debug_info    0x00000000000003f7     0x12c2 lib/libbsp.a(board.o)
- .debug_info    0x00000000000016b9      0x322 lib/libbsp.a(gpio.o)
- .debug_info    0x00000000000019db      0x2c0 lib/libbsp.a(buggy.o)
- .debug_info    0x0000000000001c9b      0x3bf lib/libbsp.a(pwm.o)
+.debug_info     0x0000000000000000    0x1c6fb
+ .debug_info    0x0000000000000000      0x708 main.o
+ .debug_info    0x0000000000000708      0x2d0 startup.o
+ .debug_info    0x00000000000009d8       0x75 lib/libbsp.a(system.o)
+ .debug_info    0x0000000000000a4d     0x12c2 lib/libbsp.a(board.o)
+ .debug_info    0x0000000000001d0f      0x29d lib/libbsp.a(serial.o)
+ .debug_info    0x0000000000001fac      0x322 lib/libbsp.a(gpio.o)
+ .debug_info    0x00000000000022ce      0x368 lib/libbsp.a(buggy.o)
+ .debug_info    0x0000000000002636      0x3bf lib/libbsp.a(pwm.o)
+ .debug_info    0x00000000000029f5     0x33f2 rtx/librtx.a(rtx_kernel.o)
+ .debug_info    0x0000000000005de7      0xc38 rtx/librtx.a(rtx_lib.o)
+ .debug_info    0x0000000000006a1f      0x639 rtx/librtx.a(rtx_memory.o)
+ .debug_info    0x0000000000007058     0x34e0 rtx/librtx.a(rtx_mempool.o)
+ .debug_info    0x000000000000a538     0x11fd rtx/librtx.a(rtx_system.o)
+ .debug_info    0x000000000000b735     0x6adf rtx/librtx.a(rtx_thread.o)
+ .debug_info    0x0000000000012214     0x1fb6 rtx/librtx.a(rtx_timer.o)
+ .debug_info    0x00000000000141ca       0x45 rtx/librtx.a(irq_armv7m.o)
+ .debug_info    0x000000000001420f      0x453 rtx/librtx.a(os_systick.o)
+ .debug_info    0x0000000000014662      0x100 rtx/librtx.a(RTX_Config.o)
+ .debug_info    0x0000000000014762     0x1ecf rtx/librtx.a(rtx_evr.o)
+ .debug_info    0x0000000000016631     0x41f0 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_info    0x000000000001a821     0x1eda rtx/librtx.a(rtx_mutex.o)
 
-.debug_abbrev   0x0000000000000000      0x94d
- .debug_abbrev  0x0000000000000000       0x68 main.o
- .debug_abbrev  0x0000000000000068      0x1c6 startup.o
- .debug_abbrev  0x000000000000022e       0x74 lib/libbsp.a(system.o)
- .debug_abbrev  0x00000000000002a2      0x29f lib/libbsp.a(board.o)
- .debug_abbrev  0x0000000000000541      0x15d lib/libbsp.a(gpio.o)
- .debug_abbrev  0x000000000000069e      0x105 lib/libbsp.a(buggy.o)
- .debug_abbrev  0x00000000000007a3      0x1aa lib/libbsp.a(pwm.o)
+.debug_abbrev   0x0000000000000000     0x3552
+ .debug_abbrev  0x0000000000000000      0x268 main.o
+ .debug_abbrev  0x0000000000000268      0x1c6 startup.o
+ .debug_abbrev  0x000000000000042e       0x74 lib/libbsp.a(system.o)
+ .debug_abbrev  0x00000000000004a2      0x29f lib/libbsp.a(board.o)
+ .debug_abbrev  0x0000000000000741      0x183 lib/libbsp.a(serial.o)
+ .debug_abbrev  0x00000000000008c4      0x15d lib/libbsp.a(gpio.o)
+ .debug_abbrev  0x0000000000000a21      0x104 lib/libbsp.a(buggy.o)
+ .debug_abbrev  0x0000000000000b25      0x1aa lib/libbsp.a(pwm.o)
+ .debug_abbrev  0x0000000000000ccf      0x52e rtx/librtx.a(rtx_kernel.o)
+ .debug_abbrev  0x00000000000011fd      0x20b rtx/librtx.a(rtx_lib.o)
+ .debug_abbrev  0x0000000000001408      0x1e8 rtx/librtx.a(rtx_memory.o)
+ .debug_abbrev  0x00000000000015f0      0x4ac rtx/librtx.a(rtx_mempool.o)
+ .debug_abbrev  0x0000000000001a9c      0x364 rtx/librtx.a(rtx_system.o)
+ .debug_abbrev  0x0000000000001e00      0x56e rtx/librtx.a(rtx_thread.o)
+ .debug_abbrev  0x000000000000236e      0x48f rtx/librtx.a(rtx_timer.o)
+ .debug_abbrev  0x00000000000027fd       0x21 rtx/librtx.a(irq_armv7m.o)
+ .debug_abbrev  0x000000000000281e      0x1ae rtx/librtx.a(os_systick.o)
+ .debug_abbrev  0x00000000000029cc       0x90 rtx/librtx.a(RTX_Config.o)
+ .debug_abbrev  0x0000000000002a5c      0x215 rtx/librtx.a(rtx_evr.o)
+ .debug_abbrev  0x0000000000002c71      0x4c1 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_abbrev  0x0000000000003132      0x420 rtx/librtx.a(rtx_mutex.o)
 
-.debug_aranges  0x0000000000000000      0x1f8
+.debug_loclists
+                0x0000000000000000     0x90b9
+ .debug_loclists
+                0x0000000000000000       0x7e main.o
+ .debug_loclists
+                0x000000000000007e       0x38 startup.o
+ .debug_loclists
+                0x00000000000000b6      0x3f6 lib/libbsp.a(board.o)
+ .debug_loclists
+                0x00000000000004ac      0x147 lib/libbsp.a(serial.o)
+ .debug_loclists
+                0x00000000000005f3      0x194 lib/libbsp.a(gpio.o)
+ .debug_loclists
+                0x0000000000000787      0x1c0 lib/libbsp.a(buggy.o)
+ .debug_loclists
+                0x0000000000000947      0x220 lib/libbsp.a(pwm.o)
+ .debug_loclists
+                0x0000000000000b67      0x8e6 rtx/librtx.a(rtx_kernel.o)
+ .debug_loclists
+                0x000000000000144d      0x474 rtx/librtx.a(rtx_memory.o)
+ .debug_loclists
+                0x00000000000018c1     0x1550 rtx/librtx.a(rtx_mempool.o)
+ .debug_loclists
+                0x0000000000002e11      0x162 rtx/librtx.a(rtx_system.o)
+ .debug_loclists
+                0x0000000000002f73     0x33b1 rtx/librtx.a(rtx_thread.o)
+ .debug_loclists
+                0x0000000000006324      0x9c4 rtx/librtx.a(rtx_timer.o)
+ .debug_loclists
+                0x0000000000006ce8       0x73 rtx/librtx.a(os_systick.o)
+ .debug_loclists
+                0x0000000000006d5b       0x2d rtx/librtx.a(RTX_Config.o)
+ .debug_loclists
+                0x0000000000006d88     0x1abb rtx/librtx.a(rtx_msgqueue.o)
+ .debug_loclists
+                0x0000000000008843      0x876 rtx/librtx.a(rtx_mutex.o)
+
+.debug_aranges  0x0000000000000000      0xea8
  .debug_aranges
-                0x0000000000000000       0x20 main.o
+                0x0000000000000000       0x38 main.o
  .debug_aranges
-                0x0000000000000020       0x60 startup.o
+                0x0000000000000038       0x60 startup.o
  .debug_aranges
-                0x0000000000000080       0x20 lib/libbsp.a(system.o)
+                0x0000000000000098       0x20 lib/libbsp.a(system.o)
  .debug_aranges
-                0x00000000000000a0       0x80 lib/libbsp.a(board.o)
+                0x00000000000000b8       0x80 lib/libbsp.a(board.o)
  .debug_aranges
-                0x0000000000000120       0x58 lib/libbsp.a(gpio.o)
+                0x0000000000000138       0x50 lib/libbsp.a(serial.o)
  .debug_aranges
-                0x0000000000000178       0x38 lib/libbsp.a(buggy.o)
+                0x0000000000000188       0x58 lib/libbsp.a(gpio.o)
  .debug_aranges
-                0x00000000000001b0       0x48 lib/libbsp.a(pwm.o)
+                0x00000000000001e0       0x48 lib/libbsp.a(buggy.o)
+ .debug_aranges
+                0x0000000000000228       0x48 lib/libbsp.a(pwm.o)
+ .debug_aranges
+                0x0000000000000270       0xf8 rtx/librtx.a(rtx_kernel.o)
+ .debug_aranges
+                0x0000000000000368       0x20 rtx/librtx.a(rtx_lib.o)
+ .debug_aranges
+                0x0000000000000388       0x30 rtx/librtx.a(rtx_memory.o)
+ .debug_aranges
+                0x00000000000003b8       0xc8 rtx/librtx.a(rtx_mempool.o)
+ .debug_aranges
+                0x0000000000000480       0x30 rtx/librtx.a(rtx_system.o)
+ .debug_aranges
+                0x00000000000004b0      0x1f0 rtx/librtx.a(rtx_thread.o)
+ .debug_aranges
+                0x00000000000006a0       0x90 rtx/librtx.a(rtx_timer.o)
+ .debug_aranges
+                0x0000000000000730       0x20 rtx/librtx.a(irq_armv7m.o)
+ .debug_aranges
+                0x0000000000000750       0x60 rtx/librtx.a(os_systick.o)
+ .debug_aranges
+                0x00000000000007b0       0x28 rtx/librtx.a(RTX_Config.o)
+ .debug_aranges
+                0x00000000000007d8      0x580 rtx/librtx.a(rtx_evr.o)
+ .debug_aranges
+                0x0000000000000d58       0xc8 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_aranges
+                0x0000000000000e20       0x88 rtx/librtx.a(rtx_mutex.o)
 
 .debug_rnglists
-                0x0000000000000000      0x1dc
+                0x0000000000000000     0x17a0
  .debug_rnglists
-                0x0000000000000000       0x13 main.o
+                0x0000000000000000       0x31 main.o
  .debug_rnglists
-                0x0000000000000013       0x56 startup.o
+                0x0000000000000031       0x56 startup.o
  .debug_rnglists
-                0x0000000000000069       0x22 lib/libbsp.a(system.o)
+                0x0000000000000087       0x22 lib/libbsp.a(system.o)
  .debug_rnglists
-                0x000000000000008b       0xad lib/libbsp.a(board.o)
+                0x00000000000000a9       0xad lib/libbsp.a(board.o)
  .debug_rnglists
-                0x0000000000000138       0x3d lib/libbsp.a(gpio.o)
+                0x0000000000000156       0x55 lib/libbsp.a(serial.o)
  .debug_rnglists
-                0x0000000000000175       0x25 lib/libbsp.a(buggy.o)
+                0x00000000000001ab       0x3d lib/libbsp.a(gpio.o)
  .debug_rnglists
-                0x000000000000019a       0x42 lib/libbsp.a(pwm.o)
+                0x00000000000001e8       0x31 lib/libbsp.a(buggy.o)
+ .debug_rnglists
+                0x0000000000000219       0x42 lib/libbsp.a(pwm.o)
+ .debug_rnglists
+                0x000000000000025b      0x1e5 rtx/librtx.a(rtx_kernel.o)
+ .debug_rnglists
+                0x0000000000000440       0x13 rtx/librtx.a(rtx_lib.o)
+ .debug_rnglists
+                0x0000000000000453       0x4a rtx/librtx.a(rtx_memory.o)
+ .debug_rnglists
+                0x000000000000049d      0x27f rtx/librtx.a(rtx_mempool.o)
+ .debug_rnglists
+                0x000000000000071c       0x5d rtx/librtx.a(rtx_system.o)
+ .debug_rnglists
+                0x0000000000000779      0x712 rtx/librtx.a(rtx_thread.o)
+ .debug_rnglists
+                0x0000000000000e8b      0x128 rtx/librtx.a(rtx_timer.o)
+ .debug_rnglists
+                0x0000000000000fb3       0x43 rtx/librtx.a(os_systick.o)
+ .debug_rnglists
+                0x0000000000000ff6       0x19 rtx/librtx.a(RTX_Config.o)
+ .debug_rnglists
+                0x000000000000100f      0x41b rtx/librtx.a(rtx_evr.o)
+ .debug_rnglists
+                0x000000000000142a      0x2e1 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_rnglists
+                0x000000000000170b       0x95 rtx/librtx.a(rtx_mutex.o)
 
-.debug_macro    0x0000000000000000     0x15c3
- .debug_macro   0x0000000000000000       0x96 main.o
- .debug_macro   0x0000000000000096      0xaa2 main.o
- .debug_macro   0x0000000000000b38       0x22 main.o
- .debug_macro   0x0000000000000b5a       0x8e main.o
- .debug_macro   0x0000000000000be8       0x51 main.o
- .debug_macro   0x0000000000000c39      0x103 main.o
- .debug_macro   0x0000000000000d3c       0x6a main.o
- .debug_macro   0x0000000000000da6      0x1df main.o
- .debug_macro   0x0000000000000f85       0x2e main.o
- .debug_macro   0x0000000000000fb3       0x6a startup.o
- .debug_macro   0x000000000000101d       0x29 lib/libbsp.a(system.o)
- .debug_macro   0x0000000000001046       0xb4 lib/libbsp.a(board.o)
- .debug_macro   0x00000000000010fa       0x3a lib/libbsp.a(board.o)
- .debug_macro   0x0000000000001134       0x40 lib/libbsp.a(board.o)
- .debug_macro   0x0000000000001174       0x10 lib/libbsp.a(board.o)
- .debug_macro   0x0000000000001184       0x88 lib/libbsp.a(board.o)
- .debug_macro   0x000000000000120c       0x58 lib/libbsp.a(board.o)
- .debug_macro   0x0000000000001264      0x11a lib/libbsp.a(gpio.o)
- .debug_macro   0x000000000000137e       0x75 lib/libbsp.a(buggy.o)
- .debug_macro   0x00000000000013f3      0x18b lib/libbsp.a(pwm.o)
- .debug_macro   0x000000000000157e       0x10 lib/libbsp.a(pwm.o)
- .debug_macro   0x000000000000158e       0x35 lib/libbsp.a(pwm.o)
+.debug_macro    0x0000000000000000     0x4f00
+ .debug_macro   0x0000000000000000      0x1e4 main.o
+ .debug_macro   0x00000000000001e4      0xaa2 main.o
+ .debug_macro   0x0000000000000c86       0x22 main.o
+ .debug_macro   0x0000000000000ca8       0x75 main.o
+ .debug_macro   0x0000000000000d1d       0x2a main.o
+ .debug_macro   0x0000000000000d47       0x94 main.o
+ .debug_macro   0x0000000000000ddb       0x3c main.o
+ .debug_macro   0x0000000000000e17       0x34 main.o
+ .debug_macro   0x0000000000000e4b      0x189 main.o
+ .debug_macro   0x0000000000000fd4       0x16 main.o
+ .debug_macro   0x0000000000000fea       0x43 main.o
+ .debug_macro   0x000000000000102d       0x57 main.o
+ .debug_macro   0x0000000000001084       0x34 main.o
+ .debug_macro   0x00000000000010b8       0x10 main.o
+ .debug_macro   0x00000000000010c8       0x58 main.o
+ .debug_macro   0x0000000000001120      0x1de main.o
+ .debug_macro   0x00000000000012fe      0x369 main.o
+ .debug_macro   0x0000000000001667       0x10 main.o
+ .debug_macro   0x0000000000001677       0x35 main.o
+ .debug_macro   0x00000000000016ac      0x103 main.o
+ .debug_macro   0x00000000000017af       0x6a main.o
+ .debug_macro   0x0000000000001819      0x1df main.o
+ .debug_macro   0x00000000000019f8       0x16 main.o
+ .debug_macro   0x0000000000001a0e       0x16 main.o
+ .debug_macro   0x0000000000001a24       0x29 main.o
+ .debug_macro   0x0000000000001a4d       0x3a main.o
+ .debug_macro   0x0000000000001a87       0x40 main.o
+ .debug_macro   0x0000000000001ac7       0x10 main.o
+ .debug_macro   0x0000000000001ad7       0x88 main.o
+ .debug_macro   0x0000000000001b5f       0x58 main.o
+ .debug_macro   0x0000000000001bb7       0x2e main.o
+ .debug_macro   0x0000000000001be5       0x10 main.o
+ .debug_macro   0x0000000000001bf5       0x74 main.o
+ .debug_macro   0x0000000000001c69       0x6a startup.o
+ .debug_macro   0x0000000000001cd3       0x8e startup.o
+ .debug_macro   0x0000000000001d61       0x51 startup.o
+ .debug_macro   0x0000000000001db2       0x29 lib/libbsp.a(system.o)
+ .debug_macro   0x0000000000001ddb       0xb4 lib/libbsp.a(board.o)
+ .debug_macro   0x0000000000001e8f       0xe8 lib/libbsp.a(serial.o)
+ .debug_macro   0x0000000000001f77      0x11a lib/libbsp.a(gpio.o)
+ .debug_macro   0x0000000000002091       0x75 lib/libbsp.a(buggy.o)
+ .debug_macro   0x0000000000002106      0x18b lib/libbsp.a(pwm.o)
+ .debug_macro   0x0000000000002291      0x1f1 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000002482      0x1a3 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000002625       0x2e rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000002653       0x1c rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x000000000000266f       0x22 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000002691      0x107 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000002798     0x1011 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x00000000000037a9      0x11f rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x00000000000038c8       0x22 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x00000000000038ea       0xbb rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x00000000000039a5       0x10 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x00000000000039b5      0x198 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000003b4d       0x6a rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000003bb7       0x46 rtx/librtx.a(rtx_kernel.o)
+ .debug_macro   0x0000000000003bfd       0xfe rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000003cfb      0x101 rtx/librtx.a(rtx_lib.o)
+ .debug_macro   0x0000000000003dfc      0x1fd rtx/librtx.a(rtx_memory.o)
+ .debug_macro   0x0000000000003ff9      0x1f1 rtx/librtx.a(rtx_mempool.o)
+ .debug_macro   0x00000000000041ea      0x1f1 rtx/librtx.a(rtx_system.o)
+ .debug_macro   0x00000000000043db      0x1f1 rtx/librtx.a(rtx_thread.o)
+ .debug_macro   0x00000000000045cc      0x1f1 rtx/librtx.a(rtx_timer.o)
+ .debug_macro   0x00000000000047bd       0xd2 rtx/librtx.a(os_systick.o)
+ .debug_macro   0x000000000000488f       0xb4 rtx/librtx.a(RTX_Config.o)
+ .debug_macro   0x0000000000004943      0x177 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000004aba       0x64 rtx/librtx.a(rtx_evr.o)
+ .debug_macro   0x0000000000004b1e      0x1f1 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_macro   0x0000000000004d0f      0x1f1 rtx/librtx.a(rtx_mutex.o)
 
-.debug_line     0x0000000000000000     0x1e64
- .debug_line    0x0000000000000000      0x20c main.o
- .debug_line    0x000000000000020c      0x31a startup.o
- .debug_line    0x0000000000000526       0x77 lib/libbsp.a(system.o)
- .debug_line    0x000000000000059d      0xc7f lib/libbsp.a(board.o)
- .debug_line    0x000000000000121c      0x467 lib/libbsp.a(gpio.o)
- .debug_line    0x0000000000001683      0x2ab lib/libbsp.a(buggy.o)
- .debug_line    0x000000000000192e      0x536 lib/libbsp.a(pwm.o)
+.debug_line     0x0000000000000000     0xf254
+ .debug_line    0x0000000000000000      0x42a main.o
+ .debug_line    0x000000000000042a      0x31a startup.o
+ .debug_line    0x0000000000000744       0x77 lib/libbsp.a(system.o)
+ .debug_line    0x00000000000007bb      0xc7f lib/libbsp.a(board.o)
+ .debug_line    0x000000000000143a      0x42a lib/libbsp.a(serial.o)
+ .debug_line    0x0000000000001864      0x467 lib/libbsp.a(gpio.o)
+ .debug_line    0x0000000000001ccb      0x2f6 lib/libbsp.a(buggy.o)
+ .debug_line    0x0000000000001fc1      0x536 lib/libbsp.a(pwm.o)
+ .debug_line    0x00000000000024f7     0x1695 rtx/librtx.a(rtx_kernel.o)
+ .debug_line    0x0000000000003b8c      0x2c8 rtx/librtx.a(rtx_lib.o)
+ .debug_line    0x0000000000003e54      0x696 rtx/librtx.a(rtx_memory.o)
+ .debug_line    0x00000000000044ea     0x15bc rtx/librtx.a(rtx_mempool.o)
+ .debug_line    0x0000000000005aa6      0x622 rtx/librtx.a(rtx_system.o)
+ .debug_line    0x00000000000060c8     0x3e80 rtx/librtx.a(rtx_thread.o)
+ .debug_line    0x0000000000009f48      0xeef rtx/librtx.a(rtx_timer.o)
+ .debug_line    0x000000000000ae37       0x94 rtx/librtx.a(irq_armv7m.o)
+ .debug_line    0x000000000000aecb      0x449 rtx/librtx.a(os_systick.o)
+ .debug_line    0x000000000000b314      0x2a6 rtx/librtx.a(RTX_Config.o)
+ .debug_line    0x000000000000b5ba      0xfe3 rtx/librtx.a(rtx_evr.o)
+ .debug_line    0x000000000000c59d     0x1e1b rtx/librtx.a(rtx_msgqueue.o)
+ .debug_line    0x000000000000e3b8      0xe9c rtx/librtx.a(rtx_mutex.o)
 
-.debug_str      0x0000000000000000     0x76dc
- .debug_str     0x0000000000000000     0x3c2d main.o
-                                       0x3d8d (size before relaxing)
- .debug_str     0x0000000000003c2d      0x147 startup.o
+.debug_str      0x0000000000000000    0x140b2
+ .debug_str     0x0000000000000000     0x76f1 main.o
+                                       0x7929 (size before relaxing)
+ .debug_str     0x00000000000076f1      0x102 startup.o
                                        0x3e2a (size before relaxing)
- .debug_str     0x0000000000003d74      0x10a lib/libbsp.a(system.o)
+ .debug_str     0x00000000000077f3      0x101 lib/libbsp.a(system.o)
                                        0x2ea3 (size before relaxing)
- .debug_str     0x0000000000003e7e      0x452 lib/libbsp.a(board.o)
+ .debug_str     0x00000000000078f4       0xf0 lib/libbsp.a(board.o)
                                        0x4196 (size before relaxing)
- .debug_str     0x00000000000042d0      0x250 lib/libbsp.a(gpio.o)
+ .debug_str     0x00000000000079e4      0x27b lib/libbsp.a(serial.o)
+                                       0x402e (size before relaxing)
+ .debug_str     0x0000000000007c5f      0x247 lib/libbsp.a(gpio.o)
                                        0x4319 (size before relaxing)
- .debug_str     0x0000000000004520       0xa1 lib/libbsp.a(buggy.o)
-                                       0x3ec0 (size before relaxing)
- .debug_str     0x00000000000045c1     0x311b lib/libbsp.a(pwm.o)
+ .debug_str     0x0000000000007ea6       0x83 lib/libbsp.a(buggy.o)
+                                       0x3ee4 (size before relaxing)
+ .debug_str     0x0000000000007f29      0x2f0 lib/libbsp.a(pwm.o)
                                        0x6f2d (size before relaxing)
+ .debug_str     0x0000000000008219     0x97e0 rtx/librtx.a(rtx_kernel.o)
+                                      0x10bd8 (size before relaxing)
+ .debug_str     0x00000000000119f9      0x278 rtx/librtx.a(rtx_lib.o)
+                                       0xcf22 (size before relaxing)
+ .debug_str     0x0000000000011c71       0xf8 rtx/librtx.a(rtx_memory.o)
+                                       0xfa44 (size before relaxing)
+ .debug_str     0x0000000000011d69      0x696 rtx/librtx.a(rtx_mempool.o)
+                                      0x1053b (size before relaxing)
+ .debug_str     0x00000000000123ff      0x151 rtx/librtx.a(rtx_system.o)
+                                       0xffc2 (size before relaxing)
+ .debug_str     0x0000000000012550      0xbc9 rtx/librtx.a(rtx_thread.o)
+                                      0x1121d (size before relaxing)
+ .debug_str     0x0000000000013119      0x281 rtx/librtx.a(rtx_timer.o)
+                                      0x101d1 (size before relaxing)
+ .debug_str     0x000000000001339a       0x1b rtx/librtx.a(irq_armv7m.o)
+                                         0x6d (size before relaxing)
+ .debug_str     0x00000000000133b5      0x182 rtx/librtx.a(os_systick.o)
+                                       0xb104 (size before relaxing)
+ .debug_str     0x0000000000013537        0xd rtx/librtx.a(RTX_Config.o)
+                                       0x5b67 (size before relaxing)
+ .debug_str     0x0000000000013544      0x6b6 rtx/librtx.a(rtx_evr.o)
+                                       0xa0b7 (size before relaxing)
+ .debug_str     0x0000000000013bfa      0x353 rtx/librtx.a(rtx_msgqueue.o)
+                                      0x10b50 (size before relaxing)
+ .debug_str     0x0000000000013f4d      0x165 rtx/librtx.a(rtx_mutex.o)
+                                      0x10254 (size before relaxing)
 
 .comment        0x0000000000000000       0x45
  .comment       0x0000000000000000       0x45 main.o
@@ -1131,12 +2964,25 @@ LOAD linker stubs
  .comment       0x0000000000000045       0x46 startup.o
  .comment       0x0000000000000045       0x46 lib/libbsp.a(system.o)
  .comment       0x0000000000000045       0x46 lib/libbsp.a(board.o)
+ .comment       0x0000000000000045       0x46 lib/libbsp.a(serial.o)
  .comment       0x0000000000000045       0x46 lib/libbsp.a(gpio.o)
  .comment       0x0000000000000045       0x46 lib/libbsp.a(buggy.o)
  .comment       0x0000000000000045       0x46 lib/libbsp.a(pwm.o)
+ .comment       0x0000000000000045       0x46 rtx/librtx.a(rtx_kernel.o)
+ .comment       0x0000000000000045       0x46 rtx/librtx.a(rtx_lib.o)
+ .comment       0x0000000000000045       0x46 rtx/librtx.a(rtx_memory.o)
+ .comment       0x0000000000000045       0x46 rtx/librtx.a(rtx_mempool.o)
+ .comment       0x0000000000000045       0x46 rtx/librtx.a(rtx_system.o)
+ .comment       0x0000000000000045       0x46 rtx/librtx.a(rtx_thread.o)
+ .comment       0x0000000000000045       0x46 rtx/librtx.a(rtx_timer.o)
+ .comment       0x0000000000000045       0x46 rtx/librtx.a(os_systick.o)
+ .comment       0x0000000000000045       0x46 rtx/librtx.a(RTX_Config.o)
+ .comment       0x0000000000000045       0x46 rtx/librtx.a(rtx_evr.o)
+ .comment       0x0000000000000045       0x46 rtx/librtx.a(rtx_msgqueue.o)
+ .comment       0x0000000000000045       0x46 rtx/librtx.a(rtx_mutex.o)
 
 .ARM.attributes
-                0x0000000000000000       0x34
+                0x0000000000000000       0x32
  .ARM.attributes
                 0x0000000000000000       0x34 main.o
  .ARM.attributes
@@ -1146,30 +2992,85 @@ LOAD linker stubs
  .ARM.attributes
                 0x000000000000009c       0x34 lib/libbsp.a(board.o)
  .ARM.attributes
-                0x00000000000000d0       0x34 lib/libbsp.a(gpio.o)
+                0x00000000000000d0       0x34 lib/libbsp.a(serial.o)
  .ARM.attributes
-                0x0000000000000104       0x34 lib/libbsp.a(buggy.o)
+                0x0000000000000104       0x34 lib/libbsp.a(gpio.o)
  .ARM.attributes
-                0x0000000000000138       0x34 lib/libbsp.a(pwm.o)
+                0x0000000000000138       0x34 lib/libbsp.a(buggy.o)
+ .ARM.attributes
+                0x000000000000016c       0x34 lib/libbsp.a(pwm.o)
+ .ARM.attributes
+                0x00000000000001a0       0x34 rtx/librtx.a(rtx_kernel.o)
+ .ARM.attributes
+                0x00000000000001d4       0x34 rtx/librtx.a(rtx_lib.o)
+ .ARM.attributes
+                0x0000000000000208       0x34 rtx/librtx.a(rtx_memory.o)
+ .ARM.attributes
+                0x000000000000023c       0x34 rtx/librtx.a(rtx_mempool.o)
+ .ARM.attributes
+                0x0000000000000270       0x34 rtx/librtx.a(rtx_system.o)
+ .ARM.attributes
+                0x00000000000002a4       0x34 rtx/librtx.a(rtx_thread.o)
+ .ARM.attributes
+                0x00000000000002d8       0x34 rtx/librtx.a(rtx_timer.o)
+ .ARM.attributes
+                0x000000000000030c       0x22 rtx/librtx.a(irq_armv7m.o)
+ .ARM.attributes
+                0x000000000000032e       0x34 rtx/librtx.a(os_systick.o)
+ .ARM.attributes
+                0x0000000000000362       0x34 rtx/librtx.a(RTX_Config.o)
+ .ARM.attributes
+                0x0000000000000396       0x34 rtx/librtx.a(rtx_evr.o)
+ .ARM.attributes
+                0x00000000000003ca       0x34 rtx/librtx.a(rtx_msgqueue.o)
+ .ARM.attributes
+                0x00000000000003fe       0x34 rtx/librtx.a(rtx_mutex.o)
+ .ARM.attributes
+                0x0000000000000432       0x34 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memset.o)
+ .ARM.attributes
+                0x0000000000000466       0x20 /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memcpy.o)
+ .ARM.attributes
+                0x0000000000000486       0x22 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubdf3.o)
+ .ARM.attributes
+                0x00000000000004a8       0x22 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldivdf3.o)
+ .ARM.attributes
+                0x00000000000004ca       0x22 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
 
-.debug_frame    0x0000000000000000      0x454
- .debug_frame   0x0000000000000000       0x28 main.o
- .debug_frame   0x0000000000000028       0xa8 startup.o
- .debug_frame   0x00000000000000d0       0x2c lib/libbsp.a(system.o)
- .debug_frame   0x00000000000000fc      0x188 lib/libbsp.a(board.o)
- .debug_frame   0x0000000000000284       0xb0 lib/libbsp.a(gpio.o)
- .debug_frame   0x0000000000000334       0x80 lib/libbsp.a(buggy.o)
- .debug_frame   0x00000000000003b4       0xa0 lib/libbsp.a(pwm.o)
+.debug_frame    0x0000000000000000     0x24d8
+ .debug_frame   0x0000000000000000       0x78 main.o
+ .debug_frame   0x0000000000000078       0xa8 startup.o
+ .debug_frame   0x0000000000000120       0x2c lib/libbsp.a(system.o)
+ .debug_frame   0x000000000000014c      0x188 lib/libbsp.a(board.o)
+ .debug_frame   0x00000000000002d4       0x9c lib/libbsp.a(serial.o)
+ .debug_frame   0x0000000000000370       0xb0 lib/libbsp.a(gpio.o)
+ .debug_frame   0x0000000000000420       0xb8 lib/libbsp.a(buggy.o)
+ .debug_frame   0x00000000000004d8       0xa0 lib/libbsp.a(pwm.o)
+ .debug_frame   0x0000000000000578      0x2f0 rtx/librtx.a(rtx_kernel.o)
+ .debug_frame   0x0000000000000868       0x20 rtx/librtx.a(rtx_lib.o)
+ .debug_frame   0x0000000000000888       0x60 rtx/librtx.a(rtx_memory.o)
+ .debug_frame   0x00000000000008e8      0x278 rtx/librtx.a(rtx_mempool.o)
+ .debug_frame   0x0000000000000b60       0x84 rtx/librtx.a(rtx_system.o)
+ .debug_frame   0x0000000000000be4      0x61c rtx/librtx.a(rtx_thread.o)
+ .debug_frame   0x0000000000001200      0x1a0 rtx/librtx.a(rtx_timer.o)
+ .debug_frame   0x00000000000013a0       0xac rtx/librtx.a(os_systick.o)
+ .debug_frame   0x000000000000144c       0x30 rtx/librtx.a(RTX_Config.o)
+ .debug_frame   0x000000000000147c      0xae0 rtx/librtx.a(rtx_evr.o)
+ .debug_frame   0x0000000000001f5c      0x2b8 rtx/librtx.a(rtx_msgqueue.o)
+ .debug_frame   0x0000000000002214      0x178 rtx/librtx.a(rtx_mutex.o)
+ .debug_frame   0x000000000000238c       0x2c /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memset.o)
+ .debug_frame   0x00000000000023b8       0xac /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubdf3.o)
+ .debug_frame   0x0000000000002464       0x50 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldivdf3.o)
+ .debug_frame   0x00000000000024b4       0x24 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
 
-.debug_loclists
-                0x0000000000000000      0x9a2
- .debug_loclists
-                0x0000000000000000       0x38 startup.o
- .debug_loclists
-                0x0000000000000038      0x3f6 lib/libbsp.a(board.o)
- .debug_loclists
-                0x000000000000042e      0x194 lib/libbsp.a(gpio.o)
- .debug_loclists
-                0x00000000000005c2      0x1c0 lib/libbsp.a(buggy.o)
- .debug_loclists
-                0x0000000000000782      0x220 lib/libbsp.a(pwm.o)
+.debug_line_str
+                0x0000000000000000      0x1d7
+ .debug_line_str
+                0x0000000000000000       0x34 rtx/librtx.a(irq_armv7m.o)
+ .debug_line_str
+                0x0000000000000034       0xdc /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(libc_a-memcpy.o)
+ .debug_line_str
+                0x0000000000000110       0xc7 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubdf3.o)
+ .debug_line_str
+                0x00000000000001d7       0xc7 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldivdf3.o)
+ .debug_line_str
+                0x00000000000001d7       0xc7 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
