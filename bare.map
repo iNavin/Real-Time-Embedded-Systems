@@ -65,13 +65,15 @@ lib/libbsp.a(adc.o)           lib/libbsp.a(audio.o) (adc_init)
 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldf3.o)
                               lib/libbsp.a(audio.o) (__aeabi_dmul)
 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubdf3.o)
-                              /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a(libm_a-e_pow.o) (__aeabi_dsub)
+                              lib/libbsp.a(buggy.o) (__aeabi_dsub)
 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldivdf3.o)
                               lib/libbsp.a(audio.o) (__aeabi_ddiv)
 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_cmpdf2.o)
                               /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a(libm_a-w_pow.o) (__aeabi_dcmpeq)
 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_unorddf2.o)
                               /opt/arm-gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a(libm_a-w_pow.o) (__aeabi_dcmpun)
+/opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
+                              lib/libbsp.a(buggy.o) (__aeabi_d2iz)
 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixunsdfsi.o)
                               lib/libbsp.a(audio.o) (__aeabi_d2uiz)
 
@@ -339,6 +341,10 @@ Discarded input sections
  .text          0x0000000000000000        0x0 lib/libbsp.a(buggy.o)
  .data          0x0000000000000000        0x0 lib/libbsp.a(buggy.o)
  .bss           0x0000000000000000        0x0 lib/libbsp.a(buggy.o)
+ .text.buggy_move_forward
+                0x0000000000000000       0x50 lib/libbsp.a(buggy.o)
+ .text.buggy_move_reverse
+                0x0000000000000000       0x50 lib/libbsp.a(buggy.o)
  .debug_macro   0x0000000000000000      0xaa2 lib/libbsp.a(buggy.o)
  .debug_macro   0x0000000000000000       0x22 lib/libbsp.a(buggy.o)
  .debug_macro   0x0000000000000000       0x8e lib/libbsp.a(buggy.o)
@@ -814,6 +820,14 @@ Discarded input sections
  .debug_frame   0x0000000000000000       0x20 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_unorddf2.o)
  .ARM.attributes
                 0x0000000000000000       0x22 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_unorddf2.o)
+ .text          0x0000000000000000       0x50 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
+ .data          0x0000000000000000        0x0 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
+ .bss           0x0000000000000000        0x0 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
+ .debug_line_str
+                0x0000000000000000       0xc7 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
+ .debug_frame   0x0000000000000000       0x24 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
+ .ARM.attributes
+                0x0000000000000000       0x22 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixdfsi.o)
  .text          0x0000000000000000       0x40 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixunsdfsi.o)
  .data          0x0000000000000000        0x0 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixunsdfsi.o)
  .bss           0x0000000000000000        0x0 /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixunsdfsi.o)
@@ -833,7 +847,7 @@ SRAM             0x0000000020000000 0x0000000000020000 xrw
 Linker script and memory map
 
 
-.text           0x0000000000000000      0x794
+.text           0x0000000000000000      0x78c
  *(.vectors)
  .vectors       0x0000000000000000      0x200 startup.o
                 0x0000000000000000                vector_table
@@ -881,79 +895,78 @@ Linker script and memory map
  .text.buggy_init
                 0x00000000000004ac       0x18 lib/libbsp.a(buggy.o)
                 0x00000000000004ac                buggy_init
- .text.buggy_move_forward
-                0x00000000000004c4       0x20 lib/libbsp.a(buggy.o)
-                0x00000000000004c4                buggy_move_forward
- *fill*         0x00000000000004e4        0x4 
+ .text.buggy_spin_left
+                0x00000000000004c4       0x1c lib/libbsp.a(buggy.o)
+                0x00000000000004c4                buggy_spin_left
  .text.init_channel_registers
-                0x00000000000004e8      0x180 lib/libbsp.a(pwm.o)
-                0x00000000000004e8                init_channel_registers
+                0x00000000000004e0      0x180 lib/libbsp.a(pwm.o)
+                0x00000000000004e0                init_channel_registers
  .text.pwm_init
-                0x0000000000000668       0x2c lib/libbsp.a(pwm.o)
-                0x0000000000000668                pwm_init
+                0x0000000000000660       0x2c lib/libbsp.a(pwm.o)
+                0x0000000000000660                pwm_init
  .text.pwm_pulse5ms
-                0x0000000000000694       0x44 lib/libbsp.a(pwm.o)
-                0x0000000000000694                pwm_pulse5ms
+                0x000000000000068c       0x44 lib/libbsp.a(pwm.o)
+                0x000000000000068c                pwm_pulse5ms
  *(.rodata*)
  .rodata.led_cols
-                0x00000000000006d8        0x5 lib/libbsp.a(board.o)
-                0x00000000000006d8                led_cols
- *fill*         0x00000000000006dd        0x3 
+                0x00000000000006d0        0x5 lib/libbsp.a(board.o)
+                0x00000000000006d0                led_cols
+ *fill*         0x00000000000006d5        0x3 
  .rodata.led_rows
-                0x00000000000006e0        0x5 lib/libbsp.a(board.o)
-                0x00000000000006e0                led_rows
- *fill*         0x00000000000006e5        0x3 
+                0x00000000000006d8        0x5 lib/libbsp.a(board.o)
+                0x00000000000006d8                led_rows
+ *fill*         0x00000000000006dd        0x3 
  .rodata.CSWTCH.16
-                0x00000000000006e8        0xc lib/libbsp.a(pwm.o)
+                0x00000000000006e0        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.15
-                0x00000000000006f4        0xc lib/libbsp.a(pwm.o)
+                0x00000000000006ec        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.14
-                0x0000000000000700        0xc lib/libbsp.a(pwm.o)
+                0x00000000000006f8        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.13
-                0x000000000000070c        0xc lib/libbsp.a(pwm.o)
+                0x0000000000000704        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.12
-                0x0000000000000718        0xc lib/libbsp.a(pwm.o)
+                0x0000000000000710        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.11
-                0x0000000000000724        0xc lib/libbsp.a(pwm.o)
+                0x000000000000071c        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.10
-                0x0000000000000730        0xc lib/libbsp.a(pwm.o)
+                0x0000000000000728        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.9
-                0x000000000000073c        0xc lib/libbsp.a(pwm.o)
+                0x0000000000000734        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.8
-                0x0000000000000748        0xc lib/libbsp.a(pwm.o)
+                0x0000000000000740        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.7
-                0x0000000000000754        0xc lib/libbsp.a(pwm.o)
+                0x000000000000074c        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.6
-                0x0000000000000760        0xc lib/libbsp.a(pwm.o)
+                0x0000000000000758        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.5
-                0x000000000000076c        0xc lib/libbsp.a(pwm.o)
+                0x0000000000000764        0xc lib/libbsp.a(pwm.o)
  .rodata.CSWTCH.4
-                0x0000000000000778        0xc lib/libbsp.a(pwm.o)
+                0x0000000000000770        0xc lib/libbsp.a(pwm.o)
  .rodata.PWM_PSEL_OFFSET
-                0x0000000000000784       0x10 lib/libbsp.a(pwm.o)
-                0x0000000000000794                . = ALIGN (0x4)
-                0x0000000000000794                __etext = .
+                0x000000000000077c       0x10 lib/libbsp.a(pwm.o)
+                0x000000000000078c                . = ALIGN (0x4)
+                0x000000000000078c                __etext = .
 
-.glue_7         0x0000000000000794        0x0
- .glue_7        0x0000000000000794        0x0 linker stubs
+.glue_7         0x000000000000078c        0x0
+ .glue_7        0x000000000000078c        0x0 linker stubs
 
-.glue_7t        0x0000000000000794        0x0
- .glue_7t       0x0000000000000794        0x0 linker stubs
+.glue_7t        0x000000000000078c        0x0
+ .glue_7t       0x000000000000078c        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000000794        0x0
- .vfp11_veneer  0x0000000000000794        0x0 linker stubs
+.vfp11_veneer   0x000000000000078c        0x0
+ .vfp11_veneer  0x000000000000078c        0x0 linker stubs
 
-.v4_bx          0x0000000000000794        0x0
- .v4_bx         0x0000000000000794        0x0 linker stubs
+.v4_bx          0x000000000000078c        0x0
+ .v4_bx         0x000000000000078c        0x0 linker stubs
 
-.iplt           0x0000000000000794        0x0
- .iplt          0x0000000000000794        0x0 main.o
+.iplt           0x000000000000078c        0x0
+ .iplt          0x000000000000078c        0x0 main.o
 
-.rel.dyn        0x0000000000000794        0x0
- .rel.iplt      0x0000000000000794        0x0 main.o
+.rel.dyn        0x000000000000078c        0x0
+ .rel.iplt      0x000000000000078c        0x0 main.o
 
-.data           0x0000000020000000        0x0 load address 0x0000000000000794
-                0x0000000000000794                __data_load__ = LOADADDR (.data)
+.data           0x0000000020000000        0x0 load address 0x000000000000078c
+                0x000000000000078c                __data_load__ = LOADADDR (.data)
                 0x0000000020000000                __data_start__ = .
                 0x0000000020000000                . = ALIGN (0x4)
  *(.data*)
@@ -1012,25 +1025,25 @@ LOAD /opt/arm-gcc/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/libgcc.a
 OUTPUT(MICROBIT.out elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x0000000000000000     0x1f24
- .debug_info    0x0000000000000000       0xc1 main.o
- .debug_info    0x00000000000000c1      0x2d0 startup.o
- .debug_info    0x0000000000000391       0x75 lib/libbsp.a(system.o)
- .debug_info    0x0000000000000406     0x12c2 lib/libbsp.a(board.o)
- .debug_info    0x00000000000016c8      0x322 lib/libbsp.a(gpio.o)
- .debug_info    0x00000000000019ea      0x17b lib/libbsp.a(buggy.o)
- .debug_info    0x0000000000001b65      0x3bf lib/libbsp.a(pwm.o)
+.debug_info     0x0000000000000000     0x205a
+ .debug_info    0x0000000000000000       0xb2 main.o
+ .debug_info    0x00000000000000b2      0x2d0 startup.o
+ .debug_info    0x0000000000000382       0x75 lib/libbsp.a(system.o)
+ .debug_info    0x00000000000003f7     0x12c2 lib/libbsp.a(board.o)
+ .debug_info    0x00000000000016b9      0x322 lib/libbsp.a(gpio.o)
+ .debug_info    0x00000000000019db      0x2c0 lib/libbsp.a(buggy.o)
+ .debug_info    0x0000000000001c9b      0x3bf lib/libbsp.a(pwm.o)
 
-.debug_abbrev   0x0000000000000000      0x949
- .debug_abbrev  0x0000000000000000       0x94 main.o
- .debug_abbrev  0x0000000000000094      0x1c6 startup.o
- .debug_abbrev  0x000000000000025a       0x74 lib/libbsp.a(system.o)
- .debug_abbrev  0x00000000000002ce      0x29f lib/libbsp.a(board.o)
- .debug_abbrev  0x000000000000056d      0x15d lib/libbsp.a(gpio.o)
- .debug_abbrev  0x00000000000006ca       0xd5 lib/libbsp.a(buggy.o)
- .debug_abbrev  0x000000000000079f      0x1aa lib/libbsp.a(pwm.o)
+.debug_abbrev   0x0000000000000000      0x94d
+ .debug_abbrev  0x0000000000000000       0x68 main.o
+ .debug_abbrev  0x0000000000000068      0x1c6 startup.o
+ .debug_abbrev  0x000000000000022e       0x74 lib/libbsp.a(system.o)
+ .debug_abbrev  0x00000000000002a2      0x29f lib/libbsp.a(board.o)
+ .debug_abbrev  0x0000000000000541      0x15d lib/libbsp.a(gpio.o)
+ .debug_abbrev  0x000000000000069e      0x105 lib/libbsp.a(buggy.o)
+ .debug_abbrev  0x00000000000007a3      0x1aa lib/libbsp.a(pwm.o)
 
-.debug_aranges  0x0000000000000000      0x1e8
+.debug_aranges  0x0000000000000000      0x1f8
  .debug_aranges
                 0x0000000000000000       0x20 main.o
  .debug_aranges
@@ -1042,12 +1055,12 @@ LOAD linker stubs
  .debug_aranges
                 0x0000000000000120       0x58 lib/libbsp.a(gpio.o)
  .debug_aranges
-                0x0000000000000178       0x28 lib/libbsp.a(buggy.o)
+                0x0000000000000178       0x38 lib/libbsp.a(buggy.o)
  .debug_aranges
-                0x00000000000001a0       0x48 lib/libbsp.a(pwm.o)
+                0x00000000000001b0       0x48 lib/libbsp.a(pwm.o)
 
 .debug_rnglists
-                0x0000000000000000      0x1d0
+                0x0000000000000000      0x1dc
  .debug_rnglists
                 0x0000000000000000       0x13 main.o
  .debug_rnglists
@@ -1059,9 +1072,9 @@ LOAD linker stubs
  .debug_rnglists
                 0x0000000000000138       0x3d lib/libbsp.a(gpio.o)
  .debug_rnglists
-                0x0000000000000175       0x19 lib/libbsp.a(buggy.o)
+                0x0000000000000175       0x25 lib/libbsp.a(buggy.o)
  .debug_rnglists
-                0x000000000000018e       0x42 lib/libbsp.a(pwm.o)
+                0x000000000000019a       0x42 lib/libbsp.a(pwm.o)
 
 .debug_macro    0x0000000000000000     0x15c3
  .debug_macro   0x0000000000000000       0x96 main.o
@@ -1087,29 +1100,29 @@ LOAD linker stubs
  .debug_macro   0x000000000000157e       0x10 lib/libbsp.a(pwm.o)
  .debug_macro   0x000000000000158e       0x35 lib/libbsp.a(pwm.o)
 
-.debug_line     0x0000000000000000     0x1df7
+.debug_line     0x0000000000000000     0x1e64
  .debug_line    0x0000000000000000      0x20c main.o
  .debug_line    0x000000000000020c      0x31a startup.o
  .debug_line    0x0000000000000526       0x77 lib/libbsp.a(system.o)
  .debug_line    0x000000000000059d      0xc7f lib/libbsp.a(board.o)
  .debug_line    0x000000000000121c      0x467 lib/libbsp.a(gpio.o)
- .debug_line    0x0000000000001683      0x23e lib/libbsp.a(buggy.o)
- .debug_line    0x00000000000018c1      0x536 lib/libbsp.a(pwm.o)
+ .debug_line    0x0000000000001683      0x2ab lib/libbsp.a(buggy.o)
+ .debug_line    0x000000000000192e      0x536 lib/libbsp.a(pwm.o)
 
-.debug_str      0x0000000000000000     0x7679
- .debug_str     0x0000000000000000     0x3c30 main.o
-                                       0x3d90 (size before relaxing)
- .debug_str     0x0000000000003c30      0x147 startup.o
+.debug_str      0x0000000000000000     0x76dc
+ .debug_str     0x0000000000000000     0x3c2d main.o
+                                       0x3d8d (size before relaxing)
+ .debug_str     0x0000000000003c2d      0x147 startup.o
                                        0x3e2a (size before relaxing)
- .debug_str     0x0000000000003d77      0x10a lib/libbsp.a(system.o)
+ .debug_str     0x0000000000003d74      0x10a lib/libbsp.a(system.o)
                                        0x2ea3 (size before relaxing)
- .debug_str     0x0000000000003e81      0x452 lib/libbsp.a(board.o)
+ .debug_str     0x0000000000003e7e      0x452 lib/libbsp.a(board.o)
                                        0x4196 (size before relaxing)
- .debug_str     0x00000000000042d3      0x250 lib/libbsp.a(gpio.o)
+ .debug_str     0x00000000000042d0      0x250 lib/libbsp.a(gpio.o)
                                        0x4319 (size before relaxing)
- .debug_str     0x0000000000004523       0x3b lib/libbsp.a(buggy.o)
-                                       0x3e56 (size before relaxing)
- .debug_str     0x000000000000455e     0x311b lib/libbsp.a(pwm.o)
+ .debug_str     0x0000000000004520       0xa1 lib/libbsp.a(buggy.o)
+                                       0x3ec0 (size before relaxing)
+ .debug_str     0x00000000000045c1     0x311b lib/libbsp.a(pwm.o)
                                        0x6f2d (size before relaxing)
 
 .comment        0x0000000000000000       0x45
@@ -1139,17 +1152,17 @@ LOAD linker stubs
  .ARM.attributes
                 0x0000000000000138       0x34 lib/libbsp.a(pwm.o)
 
-.debug_frame    0x0000000000000000      0x41c
+.debug_frame    0x0000000000000000      0x454
  .debug_frame   0x0000000000000000       0x28 main.o
  .debug_frame   0x0000000000000028       0xa8 startup.o
  .debug_frame   0x00000000000000d0       0x2c lib/libbsp.a(system.o)
  .debug_frame   0x00000000000000fc      0x188 lib/libbsp.a(board.o)
  .debug_frame   0x0000000000000284       0xb0 lib/libbsp.a(gpio.o)
- .debug_frame   0x0000000000000334       0x48 lib/libbsp.a(buggy.o)
- .debug_frame   0x000000000000037c       0xa0 lib/libbsp.a(pwm.o)
+ .debug_frame   0x0000000000000334       0x80 lib/libbsp.a(buggy.o)
+ .debug_frame   0x00000000000003b4       0xa0 lib/libbsp.a(pwm.o)
 
 .debug_loclists
-                0x0000000000000000      0x860
+                0x0000000000000000      0x9a2
  .debug_loclists
                 0x0000000000000000       0x38 startup.o
  .debug_loclists
@@ -1157,6 +1170,6 @@ LOAD linker stubs
  .debug_loclists
                 0x000000000000042e      0x194 lib/libbsp.a(gpio.o)
  .debug_loclists
-                0x00000000000005c2       0x7e lib/libbsp.a(buggy.o)
+                0x00000000000005c2      0x1c0 lib/libbsp.a(buggy.o)
  .debug_loclists
-                0x0000000000000640      0x220 lib/libbsp.a(pwm.o)
+                0x0000000000000782      0x220 lib/libbsp.a(pwm.o)

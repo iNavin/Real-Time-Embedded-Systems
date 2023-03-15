@@ -10,3 +10,7 @@
 
 void buggy_init();
 void buggy_move_forward(int speed);
+void buggy_move_reverse(int speed);
+void buggy_spin_left();
+void buggy_spin_right();
+void buggy_stop();
