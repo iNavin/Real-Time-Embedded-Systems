@@ -39,16 +39,16 @@ echo Compiling lib.c
 $CC -c $CFLAGS lib.c
 echo Compiling audio.c
 $CC -c $CFLAGS audio.c
-# echo Compiling timer.c
-# $CC -c $CFLAGS timer.c
+echo Compiling buggy.c
+$CC -c $CFLAGS buggy.c
 
 # Link the object code to form exectuable program
 echo Generating libbsp.a
 /bin/rm -f libbsp.a
 $AR -r libbsp.a system.o board.o \
-        serial.o gpio.o pwm.o adc.o lib.o audio.o
+        serial.o gpio.o pwm.o adc.o lib.o audio.o buggy.o
 /bin/rm -f system.o board.o \
-        serial.o gpio.o pwm.o adc.o lib.o audio.o
+        serial.o gpio.o pwm.o adc.o lib.o audio.o buggy.o
 
 # echo Generating libbsp.a
 # /bin/rm -f libbsp.a

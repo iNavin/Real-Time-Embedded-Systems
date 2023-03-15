@@ -39,10 +39,12 @@ arm-none-eabi-size MICROBIT.out
 # Generate HEX file to load on the target
 arm-none-eabi-objcopy -O ihex MICROBIT.out MICROBIT.hex
 
+rm MICROBIT.out main.o startup.o
+
 # Upload on the target
-#cmd.exe /c copy MICROBIT.hex E:
+cmd.exe /c copy MICROBIT.hex F:
 
 # The above command is applicable for a Windows PC. You may change it
 # appropriately to on Linux or MacOS. It should be something like:
-cp MICROBIT.hex /media/navin/MICROBIT       # linux
+#cp MICROBIT.hex /media/navin/MICROBIT       # linux
 # cp MICROBIT.hex /Volumes/MICROBIT     # mac
